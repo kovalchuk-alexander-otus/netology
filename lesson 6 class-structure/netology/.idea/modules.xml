@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/onlineReader.iml" filepath="$PROJECT_DIR$/onlineReader.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/netology.iml" filepath="$PROJECT_DIR$/.idea/netology.iml" />
     </modules>
   </component>
 </project>
