@@ -31,6 +31,7 @@ public class Main {
                 }
             }
             System.out.println("Средняя температура: " + (sum / cnt));
+            System.out.println(Arrays.toString(temps));
         }
     }
 }
