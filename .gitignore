@@ -1,3 +1,12 @@
+# Intellij (maki)
+.idea/
+*.iml
+*.iws
+
+# Maven (maki)
+log/
+target/
+
 # Compiled class file
 *.class
 
