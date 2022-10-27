@@ -3,8 +3,8 @@ package ru.maki;
 import java.util.Scanner;
 
 public class Shop {
-    private final int PRODUCT_ID = 0;
-    private final int PRODUCT_COUNT = 1;
+    private final int PRODUCT_ID = 0; // индекс id продукта
+    private final int PRODUCT_COUNT = 1; // индекс количества продукта
 
     private Product[] products; // список товаров с ценами
 
@@ -36,18 +36,17 @@ public class Shop {
             System.out.print("Введите id товара и количество через пробел или введите 'end'\n > ");
             String buffer = scanner.nextLine();
 
-            if ("end".equals(buffer)) {
-                break;
-            } else {
-                try {
-                    String[] s = buffer.split(" ");
-                    int productId = Integer.parseInt(s[PRODUCT_ID]) - 1;
-                    int productCount = Integer.parseInt(s[PRODUCT_COUNT]);
-                    cart.putProductIntoCart(productId, productCount);
-                } catch (NumberFormatException e) {
-                    System.out.println("Вы ввели некорректное значение. Попробуйте еще один раз.\n\n");
-                }
+            if ("end".equals(buffer)) break;
+
+            try {
+                String[] s = buffer.split(" ");
+                int productId = Integer.parseInt(s[PRODUCT_ID]) - 1;
+                int productCount = Integer.parseInt(s[PRODUCT_COUNT]);
+                cart.putProductIntoCart(productId, productCount);
+            } catch (NumberFormatException e) {
+                System.out.println("Вы ввели некорректное значение. Попробуйте еще один раз.\n\n");
             }
+
         }
         scanner.close();
         return cart;
