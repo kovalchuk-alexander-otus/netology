@@ -1,24 +1,10 @@
+import ru.maki.Fild;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
-        System.out.println(example(0));
-        System.out.println(mult(3,3));
+        Fild fild = new Fild(9);
+        // System.out.println(Arrays.deepToString(fild.getFild()));
+        fild.init(19); // расставим кактусы по полю (число произвольное)
     }
 
-    private static int example(int value){
-        System.out.println(value);
-        if (value > 10){
-            System.out.println("Первый пример");
-            return value;
-        }
-        else return  example(value+1);
-    }
-
-    private static int mult(int a, int b){
-        if (b == 1) {
-            System.out.println("Учим умножение.");
-            return a;
-        }
-        else return a+mult(a, b-1);
-    }
 }
