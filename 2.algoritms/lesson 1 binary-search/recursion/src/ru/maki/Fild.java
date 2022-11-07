@@ -2,6 +2,7 @@ package ru.maki;
 
 import java.util.Arrays;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 public class Fild {
     private final char CELL_FREE = '-';
@@ -15,8 +16,9 @@ public class Fild {
     private char[][] fild;
     private int size = 0;
     private int[] coordinates;
-    private int[][] ways; // думал хранить все решения для последующего разбора
+    private boolean[][] ways; // думал хранить все решения для последующего разбора
     private boolean isDone = false;
+    private int[] bestSolution = new int[1];
     private Random random = new Random();
 
     public Fild(int size) {
@@ -45,7 +47,7 @@ public class Fild {
     private void printFild() {
         for (char[] chars : fild) {
             for (char aChar : chars) {
-                System.out.print(Character.toString(aChar) + " ");
+                System.out.print(aChar + " ");
             }
             System.out.println();
         }
@@ -109,7 +111,29 @@ public class Fild {
         setMen(); // размещение человека
         printFild(); // печать поля
 
-        if (findAWay(new int[]{0, 0}, new int[]{0})) printFild();
+        // подготовим чек-лист
+        this.ways = new boolean[this.size][this.size];
+        for (int i = 0; i < this.size; i++) {
+            for (int j = 0; j < this.size; j++) {
+                this.ways[i][j] = false;
+            }
+        }
+
+        // выполним поиск маршрута
+        findAWay(new int[]{0, 0}, new int[]{0});
+
+        if (!this.isDone) System.out.println("Увы и ах!");
+        else {
+            // зафиксируем первый маршрут на карте
+            System.out.println(Arrays.toString(this.bestSolution));
+            for (int w : this.bestSolution) {
+                int[] step = convertIntToCoordinate(w);
+                if (this.fild[step[ROW]][step[COLUMN]] == CELL_FREE) this.fild[step[ROW]][step[COLUMN]] = CELL_WAY;
+            }
+            System.out.println("\n\nМаршрут найден");
+            // распечатаем карту
+            printFild();
+        }
     }
 
     // преобразование числа в координату ячейки в массиве
@@ -121,8 +145,8 @@ public class Fild {
     }
 
     // преобразование координаты в число
-    private int convertCoordinateToInt(int[] coordinate){
-        return coordinate[ROW]*this.size+coordinate[COLUMN];
+    private int convertCoordinateToInt(int[] coordinate) {
+        return coordinate[ROW] * this.size + coordinate[COLUMN];
     }
 
     // учтем выбор клетки на нашем игровом поле
@@ -137,48 +161,50 @@ public class Fild {
         return newCoordinates;
     }
 
-    // TODO: протопчем тропинку от пёселя к Человеку
-    //
+    // протопчем тропинку от пёселя к Человеку
     public boolean findAWay(int[] coordinate, int[] way) {
         // System.out.println(coordinate[ROW] + ":" + coordinate[COLUMN]);
-        /*switch(this.fild[coordinate[ROW]][ coordinate[COLUMN]]){
-            case CELL_WAY :
-            case CELL_CACTUS:
-            case CELL_DOG: return true;
-            case CELL_MEN: return false;
-        }*/
 
-        // в идеале требуется делать смещение на все четыре стороны ... иначе можно проглядеть вариант
+        // проверим ... а не уперлись ли мы в кактус или теплые ноги хозяина
         if (this.fild[coordinate[ROW]][coordinate[COLUMN]] == CELL_CACTUS) return false;
         if (this.fild[coordinate[ROW]][coordinate[COLUMN]] == CELL_MEN) {
-            System.out.println("Решение" + Arrays.toString(way));
-            if (!this.isDone){
-                this.isDone = true; // установим флаг, что маршрут найден
-                // зафиксируем первый маршрут на карте
-                for (int w : way) {
-                    int[] step = convertIntToCoordinate(w);
-                    if (this.fild[step[ROW]][step[COLUMN]] == CELL_FREE) this.fild[step[ROW]][step[COLUMN]] = CELL_WAY;
-                }
-            }
+            //System.out.println("Решение" + Arrays.toString(way)); // ежели хотим посмотреть варианты маршрутов
+
+            if ((this.bestSolution.length > 1 && this.bestSolution.length > way.length) || this.bestSolution.length == 1)
+                this.bestSolution = way;
+            this.isDone = true; // установим флаг, что маршрут найден
             return true;
         }
 
-        if (this.fild[coordinate[ROW]][coordinate[COLUMN]] == CELL_FREE) {
-            // this.fild[coordinate[ROW]][coordinate[COLUMN]] = CELL_WAY;
+        // проверим, а не становились ли мы ранее на это поле - в одну реку дважды ни-ни
+        // ...не шибко нравится мне это условие, но ничего лучше не придумал
+        int lastElement = way[way.length - 1];
+        for (int i = 0; i < way.length - 1; i++) {
+            if (lastElement == way[i]) return false;
         }
 
-        int[] newWay = new int[way.length+1];
+        // начинаем формировать новую версию маршрута, которая будет учитывать текущий шаг
+        int[] newWay = new int[way.length + 1];
         for (int i = 0; i < way.length; i++) {
             newWay[i] = way[i];
         }
 
+        // направо пойдешь - кафтан потеряешь..
         if (coordinate[ROW] < this.size - 1) {
             newWay[way.length] = convertCoordinateToInt(new int[]{coordinate[ROW] + 1, coordinate[COLUMN]});
             findAWay(new int[]{coordinate[ROW] + 1, coordinate[COLUMN]}, newWay);
         }
-        if (coordinate[COLUMN] < this.size - 1){
-            newWay[way.length] = convertCoordinateToInt(new int[]{coordinate[ROW], coordinate[COLUMN]+1});
+        if (coordinate[ROW] > 0) {
+            newWay[way.length] = convertCoordinateToInt(new int[]{coordinate[ROW] - 1, coordinate[COLUMN]});
+            findAWay(new int[]{coordinate[ROW] - 1, coordinate[COLUMN]}, newWay);
+        }
+        if (coordinate[COLUMN] < this.size - 1) {
+            newWay[way.length] = convertCoordinateToInt(new int[]{coordinate[ROW], coordinate[COLUMN] + 1});
             findAWay(new int[]{coordinate[ROW], coordinate[COLUMN] + 1}, newWay);
+        }
+        if (coordinate[COLUMN] > 0) {
+            newWay[way.length] = convertCoordinateToInt(new int[]{coordinate[ROW], coordinate[COLUMN] - 1});
+            findAWay(new int[]{coordinate[ROW], coordinate[COLUMN] - 1}, newWay);
         }
 
         return true;
