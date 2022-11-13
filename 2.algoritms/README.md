@@ -3,7 +3,7 @@
 
 ### 1. [Введение в алгоритмы и структуры данных](lesson.1.binary-search/binarySearch/Intro.md)
 
-### 2. [Динамическое программирование и жадность](tasks/Dynamics.md)
+### 2. [Динамическое программирование и жадность](lesson.2.recursion/recursion/Dynamics.md)
 
 ### 3. [Сортировки](tasks/Sorts.md)
 
