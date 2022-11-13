@@ -39,12 +39,17 @@ public class Fild {
         }
     }
 
+    public Fild(char[][] fild) {
+        this.fild = fild;
+        this.size = fild.length;
+    }
+
     public char[][] getFild() {
         return fild;
     }
 
     // печать поля
-    private void printFild() {
+    public void printFild() {
         for (char[] chars : fild) {
             for (char aChar : chars) {
                 System.out.print(aChar + " ");
@@ -100,16 +105,18 @@ public class Fild {
     private void setMen() {
         int cInt = random.nextInt(this.coordinates.length - 1);
         int[] coordinate = convertIntToCoordinate(this.coordinates[cInt]);
-        this.fild[coordinate[ROW]][coordinate[COLUMN]] = CELL_MEN;
+        setMen(coordinate[ROW], coordinate[COLUMN]);
         this.coordinates = adjustListOfCoordinates(this.coordinates, cInt);
     }
 
-    public void init(int cactusCount) {
-        setDog(); // размещение пёселя
-        // setCactus(cactusCount); // размещение кактусов
-        setCactusR(cactusCount); // размещение кактусов (рекурсия)
-        setMen(); // размещение человека
-        printFild(); // печать поля
+    // размещение Человека на поле (предзаданные координаты)
+    public void setMen(int row, int column) {
+        this.fild[row][column] = CELL_MEN;
+    }
+
+    // основная логика игры - исключает начальную фазу, где рандомазим поле или получаем его в виде предзаданного
+    public void game() {
+        printFild(); // печать поля (в начале игры)
 
         // подготовим чек-лист
         this.ways = new boolean[this.size][this.size];
@@ -134,6 +141,19 @@ public class Fild {
             // распечатаем карту
             printFild();
         }
+    }
+
+    // игра - для случая, где рандомайзим поле
+    public void game(int cactusCount) {
+        makeFild(cactusCount);
+        setMen(); // размещение человека
+        game();
+    }
+
+    public void makeFild(int cactusCount) {
+        setDog(); // размещение пёселя
+        // setCactus(cactusCount); // размещение кактусов
+        setCactusR(cactusCount); // размещение кактусов (рекурсия)
     }
 
     // преобразование числа в координату ячейки в массиве
