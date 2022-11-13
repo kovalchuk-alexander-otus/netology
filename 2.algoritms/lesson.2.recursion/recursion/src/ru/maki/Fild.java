@@ -2,7 +2,6 @@ package ru.maki;
 
 import java.util.Arrays;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 public class Fild {
     private final char CELL_FREE = '-';
@@ -14,9 +13,8 @@ public class Fild {
     private final int COLUMN = 1;
     private int countCactus = 0;
     private char[][] fild;
-    private int size = 0;
+    private int size;
     private int[] coordinates;
-    private boolean[][] ways; // думал хранить все решения для последующего разбора
     private boolean isDone = false;
     private int[] bestSolution = new int[1];
     private Random random = new Random();
@@ -49,10 +47,10 @@ public class Fild {
     }
 
     // печать поля
-    public void printFild() {
+    public void printFild(String s) {
         for (char[] chars : fild) {
             for (char aChar : chars) {
-                System.out.print(aChar + " ");
+                System.out.print(s + aChar + s + (s.equals("'") ? "," : "") + " ");
             }
             System.out.println();
         }
@@ -116,15 +114,7 @@ public class Fild {
 
     // основная логика игры - исключает начальную фазу, где рандомазим поле или получаем его в виде предзаданного
     public void game() {
-        printFild(); // печать поля (в начале игры)
-
-        // подготовим чек-лист
-        this.ways = new boolean[this.size][this.size];
-        for (int i = 0; i < this.size; i++) {
-            for (int j = 0; j < this.size; j++) {
-                this.ways[i][j] = false;
-            }
-        }
+        printFild(""); // печать поля (в начале игры)
 
         // выполним поиск маршрута
         findAWay(new int[]{0, 0}, new int[]{0});
@@ -139,7 +129,7 @@ public class Fild {
             }
             System.out.println("\n\nМаршрут найден");
             // распечатаем карту
-            printFild();
+            printFild("");
         }
     }
 
@@ -158,7 +148,7 @@ public class Fild {
 
     // преобразование числа в координату ячейки в массиве
     private int[] convertIntToCoordinate(int cInt) {
-        int row = (int) (cInt / this.fild.length);
+        int row = cInt / this.fild.length;
         int column = cInt % this.fild.length;
         // System.out.println(row + ":" + column);
         return new int[]{row, column};
@@ -205,9 +195,7 @@ public class Fild {
 
         // начинаем формировать новую версию маршрута, которая будет учитывать текущий шаг
         int[] newWay = new int[way.length + 1];
-        for (int i = 0; i < way.length; i++) {
-            newWay[i] = way[i];
-        }
+        System.arraycopy(way, 0, newWay, 0, way.length);
 
         // направо пойдешь - кафтан потеряешь..
         if (coordinate[ROW] < this.size - 1) {
