@@ -2,6 +2,7 @@ import ru.maki.Bill;
 import ru.maki.TaxService;
 import ru.maki.taxtype.IncomeTaxType;
 import ru.maki.taxtype.ProgressiveTaxType;
+import ru.maki.taxtype.TaxType;
 import ru.maki.taxtype.VATaxType;
 
 import java.math.BigDecimal;
@@ -21,7 +22,8 @@ public class Main {
                 new Bill(new BigDecimal(100000.01),new ProgressiveTaxType(),new TaxService()),
                 new Bill(new BigDecimal(99999.99),new IncomeTaxType(),new TaxService()),
                 new Bill(new BigDecimal(99999.99),new VATaxType(),new TaxService()),
-                new Bill(new BigDecimal(99999.99),new ProgressiveTaxType(),new TaxService())
+                new Bill(new BigDecimal(99999.99),new ProgressiveTaxType(),new TaxService()),
+                new Bill(new BigDecimal(99999.99),new TaxType(),new TaxService())
         };
         for (int i = 0; i < payments.length; ++i) {
             Bill bill = payments[i];
