@@ -13,7 +13,7 @@ public abstract class Account {
     // контроль достаточности средств
     protected boolean checkRest(int amount) {
         if (this.balance - amount < 0) {
-            System.out.printf("Недостаточно средств на счете.\n");
+            System.out.println("Недостаточно средств на счете.");
             return false;
         }
         return true;
@@ -33,7 +33,7 @@ public abstract class Account {
         System.out.println(" ПЕРЕВОД");
         System.out.printf("[%s] - [%s] %d%n", this.code, account.code, amount);
 
-        if (this.code == account.code) {
+        if (this.code.equals(account.code)) {
             System.out.printf("Вы указали один и тот же счет [%s] ..%n%n", this.code);
             return;
         }
