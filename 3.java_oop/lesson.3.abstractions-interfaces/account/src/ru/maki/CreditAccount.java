@@ -12,7 +12,6 @@ public class CreditAccount extends Account {
     // попробуем перегрузить метод и посмотрим что из этого выйдет
     @Override
     protected boolean checkRest(int amount) {
-        System.out.println("ПЕРЕГРУЗКА");
         return true;
     }
 
@@ -20,7 +19,7 @@ public class CreditAccount extends Account {
     public void pay(int amount) {
         super.pay(amount);
         this.balance -= amount;
-        System.out.printf("Платеж на сумму %d успешно совершен.", amount);
+        System.out.printf("Платеж/списание на сумму %d успешно совершен(о).", amount);
     }
 
     @Override
@@ -33,6 +32,7 @@ public class CreditAccount extends Account {
         super.addMoney(amount);
         if (this.balance + amount > 0) {
             System.out.println("Операция не возможна - остаток по кредиту уходит в +");
+            throw new RuntimeException("Операция не возможна - остаток по кредиту уходит в +");
         } else {
             this.balance += amount;
             System.out.println("Операция пополнения успешно завершена");

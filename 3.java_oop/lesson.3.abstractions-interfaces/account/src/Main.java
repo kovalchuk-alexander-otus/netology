@@ -5,12 +5,13 @@ import ru.maki.SavingsAccount;
 public class Main {
     public static void main(String[] args) {
 
-        SavingsAccount savingsAccount = new SavingsAccount("42306810230230243923");
-        CreditAccount creditAccount = new CreditAccount("40506810102320147384");
+        SavingsAccount  savingsAccount  = new SavingsAccount("42306810230230243923");
+        CreditAccount   creditAccount   = new CreditAccount("40506810102320147384");
         CheckingAccount checkingAccount = new CheckingAccount("40817810203239045829");
 
 
         checkingAccount.transfer(savingsAccount, 100);
+        creditAccount.transfer(savingsAccount, 100);
 
         checkingAccount.addMoney(100_000);
         System.out.println(checkingAccount.toString());
@@ -25,7 +26,7 @@ public class Main {
         System.out.println(creditAccount.toString());
 
         creditAccount.pay(1_000_000);
-        creditAccount.transfer(savingsAccount,10_000);
+        creditAccount.transfer(savingsAccount, 10_000);
 
         savingsAccount.addMoney(20_000);
         savingsAccount.pay(10_000);

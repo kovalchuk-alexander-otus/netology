@@ -4,7 +4,7 @@ package ru.maki;
 //
 // Со сберегательного счета нельзя платить, только переводить и пополнять.
 // Также сберегательный не может уходить в минус.
-public class SavingsAccount extends Account{
+public class SavingsAccount extends Account {
     public SavingsAccount(String code) {
         super(code);
     }
