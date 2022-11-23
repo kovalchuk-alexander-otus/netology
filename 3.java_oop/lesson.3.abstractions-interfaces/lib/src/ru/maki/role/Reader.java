@@ -1,10 +1,10 @@
 package ru.maki.role;
 
-import ru.maki.Book;
 import ru.maki.File;
 import ru.maki.staff.User;
 
 // Читатель
+@SuppressWarnings("unused")
 public interface Reader {
 
     // беру книгу в Библиотеке

@@ -3,7 +3,6 @@ import ru.maki.staff.Administrator;
 import ru.maki.staff.Librarian;
 import ru.maki.staff.Supplier;
 import ru.maki.staff.User;
-import ru.maki.role.Role;
 
 import java.time.LocalDate;
 
@@ -16,13 +15,14 @@ public class Main {
         // затем зарегаем Библиотекаря и Администратора
         Librarian uLibrarian = new Librarian("Главная", "Розария", "Олимповна",
                                         LocalDate.of(1939, 1, 5));
+        System.out.println(uLibrarian);
         Administrator uAdministrator = new Administrator("Начитанная", "Антонина", "Павловна",
                                                 LocalDate.of(1950, 4, 8));
-
+        System.out.println(uAdministrator);
         // в какой-то момент выбираем поставщика
         Supplier uSupplier = new Supplier("Доставкин", "Федор", "Петрович",
                                       LocalDate.of(1993, 8, 14));
-
+        System.out.println(uSupplier);
         // и начинаем закупку книг у выбранного поставщика
         files = uLibrarian.makeOrder(uSupplier, new File[]{
                 new File("Словарь бранной лексики"),
@@ -30,7 +30,7 @@ public class Main {
         }, files);
 
         // доставка
-        uSupplier.delieverOrder(uAdministrator, new File[]{
+        uSupplier.deliveryOrder(uAdministrator, new File[]{
                 new File("Словарь бранной лексики"),
                 new File("Букварь")
         }, files);
@@ -49,19 +49,19 @@ public class Main {
         uAdministrator.searchBook("Философия JAVA", files);
 
         // доставка
-        uSupplier.delieverOrder(uAdministrator, new File[]{
+        uSupplier.deliveryOrder(uAdministrator, new File[]{
                 new File("Библия")
                 , new File("Детская Энциклопедия")
                 , new File("Философия JAVA")
         }, files);
 
         // окинем взором наше богатство
-        // showList(files);
+        showList(files);
 
         // затем зарегаем Читателя
         User uReader = new User("Ковальчук", "Александр", "Михайлович",
                                 LocalDate.of(1979, 11, 25));
-
+        System.out.println(uReader);
 
         uAdministrator.searchBook("Словарь бранной лексики", files);
         uAdministrator.giveBook(uSupplier,"Словарь бранной лексики", files);
@@ -94,6 +94,9 @@ public class Main {
         // если задержали больше срока - получаем уведомление о просрочке
         uAdministrator.lateNotice(uReader, files);
         uAdministrator.lateNotice(uSupplier, files);
+
+        System.out.println(uReader);
+        System.out.println(uSupplier);
 
     }
 

@@ -5,6 +5,7 @@ import ru.maki.File;
 import ru.maki.staff.User;
 
 // Библиотекарь
+@SuppressWarnings("unused")
 public interface Librarian {
 
     // оформление заказа Книг(и)

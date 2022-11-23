@@ -4,6 +4,7 @@ import ru.maki.File;
 import ru.maki.staff.User;
 
 // Администратор
+@SuppressWarnings("unused")
 public interface Administrator {
 
     // находит книги

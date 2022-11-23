@@ -62,10 +62,6 @@ public class File extends Book {
         return user;
     }
 
-    public LocalDate getReturnDate() {
-        return returnDate;
-    }
-
     @Override
     public String toString() {
         return "File{" +
@@ -74,7 +70,7 @@ public class File extends Book {
                 ", shelf=" + shelf +
                 ", returnDate=" + returnDate +
                 ", bookStatus=" + bookStatus +
-                ", user=" + user +
+                ", user=" + (user == null ? "" : user.getIO()) +
                 '}';
     }
 }

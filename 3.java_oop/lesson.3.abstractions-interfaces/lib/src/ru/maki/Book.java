@@ -1,7 +1,7 @@
 package ru.maki;
 
 public class Book {
-    String name;
+    final String name;
 
     public Book(String name) {
         this.name = name;

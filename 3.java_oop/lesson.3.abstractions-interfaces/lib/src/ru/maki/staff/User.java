@@ -10,15 +10,15 @@ import java.util.Random;
 
 public class User implements Reader {
 
-    static int sequence = 0;
-    int       idx;
-    String    Surname;
-    String    Name;
-    String    Patronymic;
-    LocalDate dateOfBirth;
+    static int       sequence = 0;
+    final  int       idx;
+    final  String    Surname;
+    final  String    Name;
+    final  String    Patronymic;
+    final  LocalDate dateOfBirth;
     File[]    files;
-    Role      role;
-    Random    random = new Random();
+    final Role   role;
+    final Random random = new Random();
 
     public User(String surname, String name, String patronymic, LocalDate dateOfBirth,
                 Role role) {
@@ -101,6 +101,20 @@ public class User implements Reader {
 
     // ИО - имя отчество пользователя
     public String getIO() {
-        return String.valueOf(new StringBuilder(this.Name).append(" ").append(this.Patronymic));
+        return this.Name + " " + this.Patronymic;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "idx=" + idx +
+                ", Surname='" + Surname + '\'' +
+                ", Name='" + Name + '\'' +
+                ", Patronymic='" + Patronymic + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", files=" + Arrays.toString(files) +
+                ", role=" + role +
+                ", random=" + random +
+                '}';
     }
 }

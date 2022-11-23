@@ -5,8 +5,9 @@ import ru.maki.File;
 import ru.maki.staff.User;
 
 // Поставщик книг
+@SuppressWarnings("unused")
 public interface Supplier {
 
     // доставка Книг(и)
-    void delieverOrder(User user, Book[] books, File[] files);
+    void deliveryOrder(User user, Book[] books, File[] files);
 }
