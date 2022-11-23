@@ -1,6 +1,8 @@
-import ru.maki.Book;
 import ru.maki.File;
-import ru.maki.User;
+import ru.maki.staff.Administrator;
+import ru.maki.staff.Librarian;
+import ru.maki.staff.Supplier;
+import ru.maki.staff.User;
 import ru.maki.role.Role;
 
 import java.time.LocalDate;
@@ -12,54 +14,57 @@ public class Main {
         File[] files = new File[0];
 
         // затем зарегаем Библиотекаря и Администратора
-        User uLibrarian = new User("Главная", "Розария", "Олимповна",
-                                   LocalDate.of(1939, 1, 5), Role.LIBRARIAN);
-        User uAdministrator = new User("Начитанная", "Антонина", "Павловна",
-                                       LocalDate.of(1950, 4, 8), Role.ADMINISTRATOR);
+        Librarian uLibrarian = new Librarian("Главная", "Розария", "Олимповна",
+                                        LocalDate.of(1939, 1, 5));
+        Administrator uAdministrator = new Administrator("Начитанная", "Антонина", "Павловна",
+                                                LocalDate.of(1950, 4, 8));
 
         // в какой-то момент выбираем поставщика
-        User uSupplier = new User("Доставкин", "Федор", "Петрович",
-                                  LocalDate.of(1993, 8, 14), Role.SUPPLIER);
+        Supplier uSupplier = new Supplier("Доставкин", "Федор", "Петрович",
+                                      LocalDate.of(1993, 8, 14));
 
         // и начинаем закупку книг у выбранного поставщика
-        files = uLibrarian.makeOrder(new File[]{
+        files = uLibrarian.makeOrder(uSupplier, new File[]{
                 new File("Словарь бранной лексики"),
                 new File("Букварь")
         }, files);
 
         // доставка
-        uSupplier.delieverOrder(new File[]{
+        uSupplier.delieverOrder(uAdministrator, new File[]{
                 new File("Словарь бранной лексики"),
                 new File("Букварь")
         }, files);
 
         // заказ
-        files = uLibrarian.makeOrder(new File[]{
-                new File("Библия")
-                , new File("Детская Энциклопедия")
-                , new File("Философия JAVA")
-        }, files);
-
-        // попытка взять книгу, которая еще в доставке
-        uAdministrator.searchBook("Философия JAVA", files);
-
-        // доставка
-        uSupplier.delieverOrder(new File[]{
+        files = uLibrarian.makeOrder(uSupplier, new File[]{
                 new File("Библия")
                 , new File("Детская Энциклопедия")
                 , new File("Философия JAVA")
         }, files);
 
         // окинем взором наше богатство
-        showList(files);
+        // showList(files);
+
+        // попытка взять книгу, которая еще в доставке
+        uAdministrator.searchBook("Философия JAVA", files);
+
+        // доставка
+        uSupplier.delieverOrder(uAdministrator, new File[]{
+                new File("Библия")
+                , new File("Детская Энциклопедия")
+                , new File("Философия JAVA")
+        }, files);
+
+        // окинем взором наше богатство
+        // showList(files);
 
         // затем зарегаем Читателя
         User uReader = new User("Ковальчук", "Александр", "Михайлович",
-                                LocalDate.of(1979, 11, 25), Role.READER);
+                                LocalDate.of(1979, 11, 25));
 
 
-        uReader.searchBook("Словарь бранной лексики", files);
-        uSupplier.takeBook("Словарь бранной лексики", files);
+        uAdministrator.searchBook("Словарь бранной лексики", files);
+        uAdministrator.giveBook(uSupplier,"Словарь бранной лексики", files);
 
         // Читатель интересуется, где бы ему найти книгу "Философия JAVA" ... и
         // получает ответ от Администратора
@@ -68,27 +73,27 @@ public class Main {
 
 
         // затем можем выдавать книги
-        uReader.takeBook("Словарь бранной лексики", files);
-        uReader.takeBook("Букварь", files);
-        uReader.takeBook("Библия", files);
-        uReader.takeBook("Детская Энциклопедия", files);
-        uReader.takeBook("Философия JAVA",files);
-
+        uAdministrator.giveBook(uReader,"Словарь бранной лексики", files);
+        uAdministrator.giveBook(uReader,"Букварь", files);
+        uAdministrator.giveBook(uReader,"Библия", files);
+        uAdministrator.giveBook(uReader,"Детская Энциклопедия", files);
+        uAdministrator.giveBook(uReader,"Философия JAVA",files);
 
         // по мере прочтения - возвращаем их в Библиотеку
-        uReader.showBooks();
+        uReader.returnBook(uAdministrator,1, files);
 
-        uReader.returnBook(1, files);
-        uReader.showBooks();
+        uReader.returnBook(uAdministrator,2, files);
 
-        uReader.returnBook(2, files);
-        uReader.showBooks();
+        uReader.returnBook(uAdministrator, 4, files);
 
-        uReader.returnBook(4, files);
+
+        uAdministrator.giveBook(uSupplier,"Словарь бранной лексики", files);
+        uAdministrator.giveBook(uSupplier,"Букварь", files);
 
 
         // если задержали больше срока - получаем уведомление о просрочке
-        uAdministrator.lateNotice(files);
+        uAdministrator.lateNotice(uReader, files);
+        uAdministrator.lateNotice(uSupplier, files);
 
     }
 

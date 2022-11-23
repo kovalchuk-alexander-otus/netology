@@ -1,5 +1,7 @@
 package ru.maki;
 
+import ru.maki.staff.User;
+
 import java.time.LocalDate;
 
 public class File extends Book {
@@ -72,7 +74,7 @@ public class File extends Book {
                 ", shelf=" + shelf +
                 ", returnDate=" + returnDate +
                 ", bookStatus=" + bookStatus +
-                ", name='" + name + '\'' +
+                ", user=" + user +
                 '}';
     }
 }

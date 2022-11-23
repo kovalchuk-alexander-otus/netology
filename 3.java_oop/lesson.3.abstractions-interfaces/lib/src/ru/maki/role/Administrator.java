@@ -1,6 +1,7 @@
 package ru.maki.role;
 
 import ru.maki.File;
+import ru.maki.staff.User;
 
 // Администратор
 public interface Administrator {
@@ -9,8 +10,8 @@ public interface Administrator {
     void searchBook(String name, File[] files);
 
     // выдает книги
-    void giveBook(File file, File[] files);
+    void giveBook(User user, String name, File[] files);
 
     // уведомляет о просрочках времени возврата
-    void lateNotice(File[] files);
+    void lateNotice(User user, File[] files);
 }
