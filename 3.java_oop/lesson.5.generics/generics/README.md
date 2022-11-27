@@ -45,9 +45,10 @@ public String toString() {
 
 ## Реализация
 Создадайте несколько экземпляров класса `Box`, используя при этом различные типы:
+
 ```java
 public class Main {
-    public static void main(String a[]) {
+    public static void main(String[] a) {
         // параметризируем класс типом String
         Box<String> sample1 = new Box<>("Нетология");
         System.out.println(sample1);
