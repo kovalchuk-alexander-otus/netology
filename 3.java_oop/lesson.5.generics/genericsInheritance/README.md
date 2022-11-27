@@ -48,6 +48,8 @@ class Box<K, T extends Fruit> {
 ## Реализация
 Создайте несколько фруктов и поместите в созданные специально для них коробки:
 ```java
+import ru.maki.Box;
+
 public class Main {
     public static void main(String a[]) {
         Box<String, Banana> bananaBox = new Box<>("banana", new Banana());
