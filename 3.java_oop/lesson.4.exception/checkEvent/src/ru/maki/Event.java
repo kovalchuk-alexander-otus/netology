@@ -44,7 +44,7 @@ public abstract class Event {
     public static void checkCollection(Event[] events) {
         for (Event event : events) {
             event.checkEvent();
-            System.out.println(event);
+            // System.out.println(event);
         }
         System.out.println("Все события корректны.");
     }
