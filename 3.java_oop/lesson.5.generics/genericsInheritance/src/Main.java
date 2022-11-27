@@ -1,6 +1,6 @@
-import ru.maki.*;
 import ru.maki.containers.FruitsBox;
 import ru.maki.containers.VegetableBox;
+import ru.maki.products.*;
 
 public class Main {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package ru.maki;
+package ru.maki.products;
 
 public abstract class Fruits {
     public String getName() {

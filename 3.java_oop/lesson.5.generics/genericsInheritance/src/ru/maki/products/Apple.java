@@ -1,4 +1,4 @@
-package ru.maki;
+package ru.maki.products;
 
 public class Apple extends Fruits {
     @Override

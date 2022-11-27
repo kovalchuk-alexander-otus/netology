@@ -1,6 +1,6 @@
 package ru.maki.containers;
 
-import ru.maki.Fruits;
+import ru.maki.products.Fruits;
 
 public class FruitsBox<K, T extends Fruits> {
     K description;
