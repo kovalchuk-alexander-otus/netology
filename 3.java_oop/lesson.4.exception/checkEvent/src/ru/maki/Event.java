@@ -16,7 +16,7 @@ public abstract class Event {
     }
 
     public void checkEvent() {
-        if (this.title.isEmpty())
+        if (this.title == null || this.title.isEmpty())
             throw new RuntimeException("Не заполненено название мероприятия.\n" + this);
         if (this.releaseYear == 0)
             throw new RuntimeException("Не заполнен год выпуска.\n" + this);
