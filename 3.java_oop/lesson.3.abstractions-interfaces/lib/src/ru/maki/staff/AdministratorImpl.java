@@ -7,10 +7,10 @@ import java.time.LocalDate;
 
 import static ru.maki.BookStatus.ON_HAND;
 
-public class Administrator extends User implements ru.maki.role.Administrator {
+public class AdministratorImpl extends ReaderImpl implements ru.maki.role.Administrator {
 
-    public Administrator(String surname, String name, String patronymic,
-                         LocalDate dateOfBirth) {
+    public AdministratorImpl(String surname, String name, String patronymic,
+                             LocalDate dateOfBirth) {
         super(surname, name, patronymic, dateOfBirth, Role.ADMINISTRATOR);
     }
 
@@ -48,20 +48,20 @@ public class Administrator extends User implements ru.maki.role.Administrator {
 
     // выдает книги
     @Override
-    public void giveBook(User user, String name, File[] files) {
+    public void giveBook(ReaderImpl reader, String name, File[] files) {
         System.out.printf("%s попыталась оформить выдачу книги \"%s\" %s%n", this.getIO(),
-                          name, user.getIO());
-        user.takeBook(name, files);
-        System.out.printf("..и напомнил(а), что теперь у %s на руках:%n", user.getIO());
-        user.showBooks();
+                          name, reader.getIO());
+        reader.takeBook(name, files);
+        System.out.printf("..и напомнил(а), что теперь у %s на руках:%n", reader.getIO());
+        reader.showBooks();
     }
 
     // уведомляет о просрочках времени возврата
     @Override
-    public void lateNotice(User user, File[] files) {
+    public void lateNotice(ReaderImpl reader, File[] files) {
         for (File file : files) {
             if (file.getBookStatus() == ON_HAND) {
-                if (file.getUser().equals(user))
+                if (file.getUser().equals(reader))
                     System.out.printf("%s просьба вернуть книгу \"%s\"%n",
                                       file.getUser().getIO(), file.getName());
             }

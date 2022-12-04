@@ -7,9 +7,9 @@ import ru.maki.role.Role;
 
 import java.time.LocalDate;
 
-public class Supplier extends User implements ru.maki.role.Supplier {
-    public Supplier(String surname, String name, String patronymic,
-                    LocalDate dateOfBirth) {
+public class SupplierImpl extends ReaderImpl implements ru.maki.role.Supplier {
+    public SupplierImpl(String surname, String name, String patronymic,
+                        LocalDate dateOfBirth) {
         super(surname, name, patronymic, dateOfBirth, Role.SUPPLIER);
     }
     @Override

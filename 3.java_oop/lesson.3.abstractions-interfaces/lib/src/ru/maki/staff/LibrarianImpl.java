@@ -7,9 +7,9 @@ import ru.maki.role.Role;
 import java.time.LocalDate;
 import java.util.Arrays;
 
-public class Librarian extends User implements ru.maki.role.Librarian {
-    public Librarian(String surname, String name, String patronymic,
-                     LocalDate dateOfBirth) {
+public class LibrarianImpl extends ReaderImpl implements ru.maki.role.Librarian {
+    public LibrarianImpl(String surname, String name, String patronymic,
+                         LocalDate dateOfBirth) {
         super(surname, name, patronymic, dateOfBirth, Role.LIBRARIAN);
     }
 

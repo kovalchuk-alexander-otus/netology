@@ -6,13 +6,12 @@ import java.time.LocalDate;
 
 public class File extends Book {
 
-    int        hall;
-    int        cabinet;
-    int        shelf;
-    LocalDate  returnDate;
-    BookStatus bookStatus;
-    User       user;
-
+    private int        hall;
+    private int        cabinet;
+    private int        shelf;
+    private LocalDate  returnDate;
+    private BookStatus bookStatus;
+    private User       user;
 
     public File(String name) {
         super(name);
