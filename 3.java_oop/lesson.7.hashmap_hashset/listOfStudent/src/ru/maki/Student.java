@@ -8,8 +8,8 @@ public class Student {
     final String studentId;
 
     public Student(String name, String group, String studentId) {
-        this.name      = name;
-        this.group     = group;
+        this.name = name;
+        this.group = group;
         this.studentId = studentId;
     }
 
