@@ -14,20 +14,20 @@ public class Main {
 
         // поиск по группе ...по имени
         Contact petr = phoneBook.searchInGroup("Друзья", "Петр");
-        System.out.println(petr);
+        // System.out.println(petr);
         phoneBook.addContact("Работа", petr);
 
 
         // поиск по номеру
         Contact contact = phoneBook.searchByNumber("7545523452");
-        System.out.println(contact);
+        // System.out.println(contact);
 
         // добавляем группу контактов
         phoneBook.addGroup("Семья");
         phoneBook.addContact("Друзья", "Алексей", "7545428812");
         phoneBook.addContact("Семья", "Алексей", "7545428812");
 
-        System.out.println(phoneBook);
+        // System.out.println(phoneBook);
 
         // забыл телефон дома
         System.out.println();
