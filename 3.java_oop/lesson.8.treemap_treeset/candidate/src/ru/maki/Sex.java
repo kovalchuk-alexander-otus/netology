@@ -1,4 +1,5 @@
 package ru.maki;
 
-public enum Sex { MALE, FEMALE
+public enum Sex {
+    MALE, FEMALE
 }
