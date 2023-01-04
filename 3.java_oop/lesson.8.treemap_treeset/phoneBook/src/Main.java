@@ -20,7 +20,7 @@ public class Main {
 
         // поиск по номеру
         Contact contact = phoneBook.searchByNumber("7545523452");
-        // System.out.println(contact);
+        System.out.println(contact);
 
         // добавляем группу контактов
         phoneBook.addGroup("Семья");
