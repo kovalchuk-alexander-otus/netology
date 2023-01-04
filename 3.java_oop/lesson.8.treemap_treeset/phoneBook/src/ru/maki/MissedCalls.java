@@ -30,7 +30,7 @@ public class MissedCalls {
         else {
             for (LocalDateTime localDateTime : this.missedCalls.keySet()) {
                 phoneNumber = this.missedCalls.get(localDateTime);
-                name = phoneBook.searchNameByNumber(this.missedCalls.get(localDateTime));
+                name = phoneBook.searchNameByNumber(phoneNumber);
                 if (name == null) System.out.println(phoneNumber);
                 else System.out.println(name);
             }

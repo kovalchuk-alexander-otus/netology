@@ -34,7 +34,7 @@ public class PhoneBook {
         }
     }
 
-    // добасление контакта
+    // добавление контакта
     // перегрузка метода : атрибуты записи - группа, имя, номер
     public void addContact(String group, String name, String phoneNumber){
         Contact contact = this.searchByNumber(phoneNumber);
@@ -61,6 +61,7 @@ public class PhoneBook {
         return null;
     }
 
+    // имя контакта по номеру телефона
     public String searchNameByNumber(String phoneNumber) {
         for (List<Contact> contacts : phones.values()) {
             for (Contact contact : contacts) {
