@@ -22,11 +22,14 @@ public class Elevator {
         int floor;
         do {
             floor = Dialog.getInteger("Ожидаю ввода этажа: (для завершения введите 0): ");
-            if (floor == -1) continue;
-            else {
+            if (floor == -1) {
+                continue;
+            } else {
                 if (floor < this.minFloor || floor > this.maxFloor) {
                     System.out.println("Такого этажа в доме нет.");
-                } else trip.offer(floor);
+                } else {
+                    trip.offer(floor);
+                }
             }
         } while (floor != 0);
 
