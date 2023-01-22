@@ -17,19 +17,19 @@ public class Main {
     }
 
     public static int[] merge(int[] team, int[] nextTeam) {
-        int i_t = 0;
-        int i_r = 0;
-        int i_nt = 0;
+        int iTeam = 0;
+        int iResult = 0;
+        int iNationalTeam = 0;
         int[] result = new int[10];
-        while (i_t < team.length && i_nt < nextTeam.length && i_r < result.length) {
-            if (team[i_t] > nextTeam[i_nt]) {
-                result[i_r] = team[i_t];
-                i_t += 1;
+        while (iTeam < team.length && iNationalTeam < nextTeam.length && iResult < result.length) {
+            if (team[iTeam] > nextTeam[iNationalTeam]) {
+                result[iResult] = team[iTeam];
+                iTeam += 1;
             } else {
-                result[i_r] = nextTeam[i_nt];
-                i_nt += 1;
+                result[iResult] = nextTeam[iNationalTeam];
+                iNationalTeam += 1;
             }
-            i_r += 1;
+            iResult += 1;
         }
         return Arrays.copyOf(result, 10);
     }
