@@ -13,6 +13,7 @@ public class Cart {
         this.products = new int[range];
     }
 
+    // осуществляем покупки..
     public void shopping() {
         String input;
         String[] shop;
@@ -38,6 +39,7 @@ public class Cart {
         }
     }
 
+    // вывод Корзины на экран
     public void showCart(Shop shop) {
         int price;
         int fullPrice = 0;
