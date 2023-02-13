@@ -19,6 +19,7 @@ public class Shop {
         return price;
     }
 
+    // вывод ассортимента товаров в Магазине на экран
     public void showShop(){
         for (int i = 0; i < this.products.length; i++) {
             System.out.printf(" %d. %s %d руб/шт%n", (i + 1), products[i], this.price[i]);
