@@ -1,6 +1,5 @@
 package ru.maki;
 
-import java.util.Arrays;
 import java.util.Random;
 
 public class Matrix {
@@ -8,19 +7,47 @@ public class Matrix {
     final static int NUMBER_OF_DIVISIONS = 4; // число делений
     final static int MAX_DIVISIONS = 3; // максимальное деление
     final int[][] matrix;
+    final int maxRange; // число цифр в максимальном числе в матрице (используем для красивого вывода на экран)
 
     public Matrix(int[][] matrix) {
         this.matrix = matrix;
+        this.maxRange = Matrix.getRange(matrix);
     }
 
     public Matrix(int rows, int columns, int bound) {
         this.matrix = new int[rows][columns];
+        this.maxRange = Matrix.getRange(bound);
         Random random = new Random();
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
                 this.matrix[i][j] = random.nextInt(bound);
             }
         }
+    }
+
+    // подсчет максимального числа знаков до запятой
+    //   для корректного вывода результата на экран
+    public static int getRange(int maxValue) {
+        int result = 1;
+        if (maxValue == 0) {
+            return 0;
+        }
+        result = result + getRange(maxValue / 10);
+        return result;
+    }
+
+    // перегрузка метода подсчета максимального числа знаков до запятой
+    //   на случай, когда сначала надо найти самое число в матрице
+    public static int getRange(int[][] matrix) {
+        int maxValue = 0;
+
+        for (int[] ints : matrix) {
+            for (int anInt : ints) {
+                maxValue = Math.max(maxValue, anInt);
+            }
+        }
+
+        return Matrix.getRange(maxValue);
     }
 
     // вращение матрицы на заданный угол поворота
@@ -61,7 +88,10 @@ public class Matrix {
     public void showMatrix(int[][] matrix) {
         for (int[] row : matrix
         ) {
-            System.out.println(Arrays.toString(row));
+            for (int j : row) {
+                System.out.printf("%" + (this.maxRange + 1) + "d", j);
+            }
+            System.out.println();
         }
     }
 
