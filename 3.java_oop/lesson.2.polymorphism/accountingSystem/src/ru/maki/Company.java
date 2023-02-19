@@ -30,7 +30,9 @@ public class Company {
             System.out.println(deal.getComment());
             this.shiftMoney(deal.getDebitChange() - deal.getCreditChange());
         }
-        return this.debit - this.credit;
+        int profit = this.debit - this.credit;
+        this.payTaxes();
+        return profit;
     }
 
     // уплата налога

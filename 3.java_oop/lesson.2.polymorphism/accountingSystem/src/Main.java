@@ -28,6 +28,7 @@ public class Main {
 
 
         System.out.println("\n____________________\n  ДЗ #2 \n~~~~~~~~~~~~~~~~~~~~");
+        company.setTaxSystem(new IncomeTax());
         Deal[] deals = new Deal[]{
                 new Sale("мёд", 1002),
                 new Sale("мёд", 1002),
@@ -41,9 +42,8 @@ public class Main {
         };
         int netIncome = company.applyDeals(deals);
         System.out.printf("Чистая прибыль : %d%n", netIncome);
-        company.setTaxSystem(new IncomeTax());
-        company.payTaxes();
 
+        company.setTaxSystem(new NetIncomeTax());
         deals = new Deal[]{
                 new Sale("мёд", 1002),
                 new Sale("мёд", 1002),
@@ -57,8 +57,6 @@ public class Main {
         };
         netIncome = company.applyDeals(deals);
         System.out.printf("Чистая прибыль : %d%n", netIncome);
-        company.setTaxSystem(new NetIncomeTax());
-        company.payTaxes();
 
     }
 }
