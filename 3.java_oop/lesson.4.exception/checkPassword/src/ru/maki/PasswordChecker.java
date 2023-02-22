@@ -1,6 +1,6 @@
 package ru.maki;
 
-import ru.maki.errors.IllegalArgumentException;
+//import ru.maki.errors.IllegalArgumentException;
 import ru.maki.errors.IllegalStateException;
 
 public class PasswordChecker {
@@ -13,7 +13,7 @@ public class PasswordChecker {
 
     public void setMinLength(int minLength) {
         if (minLength < 0) {
-            throw new IllegalArgumentException(minLength);
+            throw new IllegalArgumentException("Неверное значение minLength.["+minLength+"]");
         }
         this.minLength = minLength;
         this.isSetPolitic = true;
@@ -21,7 +21,7 @@ public class PasswordChecker {
 
     public void setMaxRepeats(int maxRepeats) {
         if (maxRepeats <= 0) {
-            throw new IllegalArgumentException(maxRepeats);
+            throw new IllegalArgumentException("Неверное значение maxRepeats.["+maxRepeats+"]");
         }
         this.maxRepeats = maxRepeats;
         this.isSetPolitic = true;
