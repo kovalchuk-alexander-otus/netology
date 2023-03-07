@@ -1,4 +1,4 @@
-package ru.maki;
+package ru.maki.utils;
 
 import java.io.File;
 import java.io.FileWriter;

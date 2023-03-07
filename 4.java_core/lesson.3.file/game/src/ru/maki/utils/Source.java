@@ -1,4 +1,4 @@
-package ru.maki;
+package ru.maki.utils;
 
 import java.util.Arrays;
 import java.util.HashMap;

@@ -1,7 +1,11 @@
-package ru.maki;
+package ru.maki.utils;
+
+import ru.maki.game.GameProgress;
+import ru.maki.utils.Log;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 public class Service {
     static String os;
@@ -88,5 +92,15 @@ public class Service {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    // сохранение уровня в файл
+    public void saveGame(String file, GameProgress gameProgress){
+
+    }
+
+    // архивирование уровня
+    public void zipFiles(String zipFile, List<String> files){
+
     }
 }

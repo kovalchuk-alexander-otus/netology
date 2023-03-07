@@ -1,8 +1,12 @@
 package ru.maki;
 
+import ru.maki.utils.Log;
+import ru.maki.utils.Service;
+import ru.maki.utils.Source;
+
 import java.util.Map;
 
-import static ru.maki.Source.getSource;
+import static ru.maki.utils.Source.getSource;
 
 // В папке Games создайте несколько директорий: src, res, savegames, temp.
 //В каталоге src создайте две директории: main, test.
