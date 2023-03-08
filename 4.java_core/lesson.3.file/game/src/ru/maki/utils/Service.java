@@ -1,11 +1,13 @@
 package ru.maki.utils;
 
 import ru.maki.game.GameProgress;
-import ru.maki.utils.Log;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
+import java.util.zip.ZipOutputStream;
 
 public class Service {
     static String os;
@@ -95,12 +97,102 @@ public class Service {
     }
 
     // сохранение уровня в файл
-    public void saveGame(String file, GameProgress gameProgress){
-
+    public static void saveGame(String file, GameProgress gameProgress) {
+        Log.info("Сохраняем уровень в файл : " + file);
+        try (FileOutputStream fileOutputStream = new FileOutputStream(file);
+             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
+            objectOutputStream.writeObject(gameProgress);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    // архивирование уровня
-    public void zipFiles(String zipFile, List<String> files){
+    // поднятие уровня из файла
+    public static GameProgress openProgress(String file) {
+        Log.info("Читаем уровень из файла : " + file);
+        try (FileInputStream fileInputStream = new FileInputStream(file);
+             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
+            return (GameProgress) objectInputStream.readObject();
+        } catch (ClassNotFoundException | IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
+    // содержимое папки savegames - список сохраненных уровней
+    public static List<String> getSaveFiles() {
+        List<String> saveFiles = new ArrayList<>();
+        File log = new File(Source.SAVE);
+        if (log.isDirectory()) {
+            for (File file : log.listFiles()) {
+                saveFiles.add(file.getAbsolutePath());
+            }
+        }
+        return saveFiles;
+    }
+
+    // архивирование уровня (пакетное архивирование)
+    public static void zipFiles(String zipFile, List<String> files) {
+        Log.info("Начинаем формировать архив сохраненных уровней : " + zipFile);
+        try (ZipOutputStream zipOutputStream = new ZipOutputStream(new FileOutputStream(zipFile))) {
+            for (String file : files) {
+                zipFile(zipOutputStream, file);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        Log.info("Удаляем файлы, помещенные в архив : " + files);
+        for (String file : files) {
+            File saveFile = new File(file);
+            if (saveFile.delete()) {
+                Log.info(file + " : удален.");
+            } else {
+                Log.warning(file + " : не удалось удалить.");
+            }
+        }
+    }
+
+    // архивирование одного файла
+    private static void zipFile(ZipOutputStream zipOutputStream, String file) {
+        Log.info("Помещаем в архив : " + file);
+        try (FileInputStream fileInputStream = new FileInputStream(file)) {
+            ZipEntry zipEntry = new ZipEntry(file.replace(Source.SAVE, ""));
+            zipOutputStream.putNextEntry(zipEntry);
+            byte[] buffer = new byte[fileInputStream.available()];
+            fileInputStream.read(buffer);
+            zipOutputStream.write(buffer);
+            zipOutputStream.closeEntry();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    // разархивирование (всего пакета)
+    public static void openZip(String zipFile, String dir) {
+        Log.info("Начинаем извлекать файлы из архива : " + zipFile + " и размещаем их в : " + dir);
+        try (ZipInputStream zipInputStream = new ZipInputStream(new FileInputStream(zipFile))) {
+            ZipEntry zipEntry;
+            String name;
+            while ((zipEntry = zipInputStream.getNextEntry()) != null) {
+                name = zipEntry.getName();
+                openZipFile(zipInputStream, dir + name);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    // разархивирование одного файла
+    public static void openZipFile(ZipInputStream zipInputStream, String file) {
+        Log.info("Извлекаем из архива : " + file);
+        try (FileOutputStream fileOutputStream = new FileOutputStream(file)) {
+            for (int c = zipInputStream.read(); c != -1; c = zipInputStream.read()) {
+                fileOutputStream.write(c);
+            }
+            fileOutputStream.flush();
+            zipInputStream.closeEntry();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

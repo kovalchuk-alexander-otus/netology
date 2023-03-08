@@ -7,6 +7,7 @@ import java.util.Map;
 public class Source {
 
     public static final String ROOT = "/";
+    public static final String SAVE = Service.getRootPath() + "/Games/savegames/";
     private static final Map<String, String[]> allSource = new HashMap<>();
 
     public static Map<String, String[]> getSource() {

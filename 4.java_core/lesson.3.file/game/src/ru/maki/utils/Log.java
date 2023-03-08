@@ -9,9 +9,9 @@ public class Log {
     private static final String INFO = "INFO";
     private static final String ERROR = "ERROR";
     private static final String WARNING = "WARNING";
-    private static final String path = "/Games/temp";
-    private static final String file = "temp.txt";
-    private static final StringBuilder log = new StringBuilder();
+    private static final String PATH = "/Games/temp";
+    private static final String FILE = "temp.txt";
+    public static final StringBuilder log = new StringBuilder();
 
     public static void info(String message) {
         write(INFO, message);
@@ -37,16 +37,15 @@ public class Log {
     }
 
     public static void writeLogToFile() {
-        // System.out.println(log.toString());
-        File logFile = new File(Service.getRootPath() + path, file);
+        File logFile = new File(Service.getRootPath() + PATH, FILE);
         try (FileWriter fileWriter = new FileWriter(logFile)) {
             fileWriter.write(log.toString());
             fileWriter.flush();
         } catch (IOException e) {
-            Log.error("Ошибка в момент записи лога в файл [" + Service.getRootPath() + "/" + path + "] [" + file + "]" +
+            Log.error("Ошибка в момент записи лога в файл [" + Service.getRootPath() + "/" + PATH + "] [" + FILE + "]" +
                     ".");
-            throw new RuntimeException("Ошибка в момент записи лога в файл [" + Service.getRootPath() + "/" + path +
-                    "] [" + file + "]. " + e.getMessage());
+            throw new RuntimeException("Ошибка в момент записи лога в файл [" + Service.getRootPath() + "/" + PATH +
+                    "] [" + FILE + "]. " + e.getMessage());
         }
     }
 
