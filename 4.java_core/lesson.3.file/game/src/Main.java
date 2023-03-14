@@ -28,6 +28,7 @@ public class Main {
         // упаковываем все сохраненные на данный момент уровни ..
         List<String> saveFiles = Service.getSaveFiles();
         Service.zipFiles(Source.SAVE + "zip.zip", saveFiles);
+        Service.delFiles(saveFiles);
 
         // распаковываем все уровни .. и поднимаем один из них
         Service.openZip(Source.SAVE + "zip.zip", Source.SAVE);

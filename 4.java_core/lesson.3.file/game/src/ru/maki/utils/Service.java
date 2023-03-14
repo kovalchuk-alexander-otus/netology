@@ -140,16 +140,6 @@ public class Service {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-        Log.info("Удаляем файлы, помещенные в архив : " + files);
-        for (String file : files) {
-            File saveFile = new File(file);
-            if (saveFile.delete()) {
-                Log.info(file + " : удален.");
-            } else {
-                Log.warning(file + " : не удалось удалить.");
-            }
-        }
     }
 
     // архивирование одного файла
@@ -164,6 +154,19 @@ public class Service {
             zipOutputStream.closeEntry();
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    // удаление списка файлов
+    public static void delFiles(List<String> files){
+        Log.info("Удаляем файлы, помещенные в архив : " + files);
+        for (String file : files) {
+            File saveFile = new File(file);
+            if (saveFile.delete()) {
+                Log.info(file + " : удален.");
+            } else {
+                Log.warning(file + " : не удалось удалить.");
+            }
         }
     }
 
