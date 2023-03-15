@@ -9,7 +9,6 @@ public class Main {
         Queue<String> queue = new ArrayDeque<>(firstClients);
 
         while (!queue.isEmpty()) {
-
             if (Math.random() < 0.5) { // проверка условия, которое срабатывает с 50% вероятностью
                 queue.offer("a friend of " + queue.peek());
             }
