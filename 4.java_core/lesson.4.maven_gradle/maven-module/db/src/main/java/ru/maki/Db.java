@@ -4,7 +4,7 @@ import java.util.UUID;
 
 public class Db {
 
-    private DbSetting dbSetting;
+    private final DbSetting dbSetting;
     private MyEntity myEntity;
 
     public Db(DbSetting dbSetting) {

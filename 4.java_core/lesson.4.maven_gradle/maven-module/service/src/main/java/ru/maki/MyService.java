@@ -4,9 +4,9 @@ import java.util.UUID;
 
 public class MyService {
 
-    private DbSetting dbSetting = new DbSetting("name", "password");
-    private String name = "myService";
-    private Db db = new Db(dbSetting);
+    private final DbSetting dbSetting = new DbSetting("name", "password");
+    private final String name = "myService";
+    private final Db db = new Db(dbSetting);
 
     public String getName() {
         return name;

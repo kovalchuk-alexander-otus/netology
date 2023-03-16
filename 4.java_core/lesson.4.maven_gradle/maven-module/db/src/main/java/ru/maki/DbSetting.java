@@ -2,8 +2,8 @@ package ru.maki;
 
 public class DbSetting {
 
-    private String name;
-    private String password;
+    private final String name;
+    private final String password;
 
     public DbSetting(String name, String password) {
         this.name = name;
