@@ -15,8 +15,8 @@ import static org.hamcrest.Matchers.*;
 public class CreditAccountTest {
 
     CreditAccount account;
-    static long balance = -1000;
-    static long limit = 100_000;
+    static final long balance = -1000;
+    static final long limit = 100_000;
 
     // тестируем открытие Кредитного счета (позитивный тест - отрицательный баланс)
     @BeforeEach
@@ -108,8 +108,4 @@ public class CreditAccountTest {
         assertThat(this.account, hasProperty("limit", equalTo(limit)));
     }
 
-    @Test
-    public void testCompareAccount() {
-
-    }
 }
