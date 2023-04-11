@@ -50,6 +50,7 @@ public class Main {
             logger.log("Выводим результат на экран");
             System.out.print("Отфильтрованный список:");
             newList.forEach(v -> System.out.printf(" %d", v));
+            System.out.println();
 
             logger.log("Завершаем программу");
         }
