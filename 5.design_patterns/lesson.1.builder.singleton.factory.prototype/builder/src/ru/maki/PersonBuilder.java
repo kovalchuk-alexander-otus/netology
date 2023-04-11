@@ -1,10 +1,12 @@
 package ru.maki;
 
+import java.util.OptionalInt;
+
 public class PersonBuilder {
 
     protected String name = "";
     protected String surname = "";
-    protected int age = Person.NO_AGE_DATA;
+    protected OptionalInt age = OptionalInt.empty();
     protected String address;
 
     public PersonBuilder() {
@@ -13,7 +15,7 @@ public class PersonBuilder {
 
     public PersonBuilder(String surname, int childAge, String address) {
         this.surname = surname;
-        this.age = childAge;
+        this.age = OptionalInt.of(childAge);
         this.address = address;
     }
 
@@ -24,7 +26,11 @@ public class PersonBuilder {
         if (this.surname.isEmpty()) {
             throw new IllegalStateException("Не задан обязательный параметр Фамилия [surname]!");
         }
-        return new Person(this.name, this.surname, this.age, this.address);
+        if (this.age.isPresent()) {
+            return new Person(this.name, this.surname, this.age.getAsInt(), this.address);
+        } else {
+            return new Person(this.name, this.surname, this.address);
+        }
     }
 
     public PersonBuilder setName(String name) {
@@ -38,7 +44,7 @@ public class PersonBuilder {
     }
 
     public PersonBuilder setAge(int age) {
-        if (age < Person.NEWBORN_AGE && age != Person.NO_AGE_DATA) {
+        if (age < Person.NEWBORN_AGE) {
             throw new IllegalArgumentException("Не корректно значение Возраста [age]! " +
                     "Возраст не может быть меньше 0 [" + age + "].");
         }
@@ -46,7 +52,7 @@ public class PersonBuilder {
             throw new IllegalArgumentException("Есть сомнения, что возраст указан корректно [" + age + "]. " +
                     "Если возраст действительно больше [" + Person.MAX_AGE + " лет] - просьба связаться с поддержкой.");
         }
-        this.age = age;
+        this.age = OptionalInt.of(age);
         return this;
     }
 

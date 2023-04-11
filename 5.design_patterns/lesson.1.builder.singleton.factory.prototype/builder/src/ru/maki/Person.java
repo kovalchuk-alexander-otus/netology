@@ -6,21 +6,26 @@ import java.util.OptionalInt;
 public class Person {
     protected final String name;
     protected final String surname;
-    protected int age;
+    protected OptionalInt age;
     protected String address;
-    public static final int NO_AGE_DATA = -1; // значение Возраста, в случае, когда нет информации
+    //public static final int NO_AGE_DATA = -1; // значение Возраста, в случае, когда нет информации
     public static final int NEWBORN_AGE = 0; // значение Возраста по-умоланию, при создании Ребенка
     public static final int MAX_AGE = 130; // максимально допустимое в системе значение Возраста
 
     public Person(String name, String surname) {
-        this(name, surname, Person.NO_AGE_DATA, null);
+        this.name = name;
+        this.surname = surname;
+        this.age = OptionalInt.empty();
+    }
+
+    public Person(String name, String surname, String address) {
+        this(name, surname);
+        this.address = address;
     }
 
     public Person(String name, String surname, int age, String address) {
-        this.name = name;
-        this.surname = surname;
-        this.age = age;
-        this.address = address;
+        this(name, surname, address);
+        this.age = OptionalInt.of(age);
     }
 
     public String getName() {
@@ -32,7 +37,7 @@ public class Person {
     }
 
     public OptionalInt getAge() {
-        return OptionalInt.of(age);
+        return age;
     }
 
     public String getAddress() {
@@ -46,12 +51,12 @@ public class Person {
     /*раз в году, поздравляем персонажа с днюрой .. не чаще, т.к. мотает счетчик лет*/
     public void happyBirthday() {
         System.out.println("С днем варения, категорически!");
-        this.age += 1;
+        OptionalInt.of(this.age.getAsInt() + 1);
     }
 
     /*статус информации о возрасте*/
     public boolean hasAge() {
-        return this.age != NO_AGE_DATA;
+        return this.age.isPresent();
     }
 
     /*статус информации о адресе*/
@@ -69,7 +74,7 @@ public class Person {
         return "Person{" +
                 "name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", age=" + age +
+                ", age=" +  age +
                 ", address='" + address + '\'' +
                 '}';
     }
@@ -91,7 +96,7 @@ public class Person {
     public int hashCode() {
         int result = name.hashCode();
         result = 31 * result + surname.hashCode();
-        result = 31 * result + age;
+        result = 31 * result + age.hashCode();
         result = 31 * result + (address != null ? address.hashCode() : 0);
         return result;
     }

@@ -4,6 +4,13 @@ import ru.maki.PersonBuilder;
 public class Main {
     public static void main(String[] args) {
 
+        Person mom = new PersonBuilder()
+                .setName("Вероника")
+                .setSurname("Лихова")
+                .setAddress("Москва")
+                .build();
+        System.out.println(mom);
+
         Person person = new PersonBuilder()
                 .setName("Антон")
                 .setSurname("Лихов")
