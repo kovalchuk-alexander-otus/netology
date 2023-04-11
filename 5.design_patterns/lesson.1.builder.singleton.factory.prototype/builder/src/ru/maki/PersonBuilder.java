@@ -38,7 +38,7 @@ public class PersonBuilder {
     }
 
     public PersonBuilder setAge(int age) {
-        if (age < 0 && age != Person.NO_AGE_DATA) {
+        if (age < Person.NEWBORN_AGE && age != Person.NO_AGE_DATA) {
             throw new IllegalArgumentException("Не корректно значение Возраста [age]! " +
                     "Возраст не может быть меньше 0 [" + age + "].");
         }
