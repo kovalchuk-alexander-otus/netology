@@ -51,7 +51,9 @@ public class Person {
     /*раз в году, поздравляем персонажа с днюрой .. не чаще, т.к. мотает счетчик лет*/
     public void happyBirthday() {
         System.out.println("С днем варения, категорически!");
-        OptionalInt.of(this.age.getAsInt() + 1);
+        if (this.age.isPresent()){
+            this.age = OptionalInt.of(this.age.getAsInt() + 1);
+        }
     }
 
     /*статус информации о возрасте*/
