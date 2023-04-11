@@ -11,8 +11,8 @@ public class Main {
         Logger logger = Logger.get();
         logger.log("Запускаем программу");
 
-        int listSize = 0;
-        int maxValue = 0;
+        int listSize;
+        int maxValue;
         try (Scanner scanner = new Scanner(System.in)) {
             logger.log("Просим пользователя ввести входные данные для списка");
 
@@ -49,7 +49,7 @@ public class Main {
                     .toString());
             logger.log("Выводим результат на экран");
             System.out.print("Отфильтрованный список:");
-            newList.stream().forEach(v -> System.out.printf(" %d", v));
+            newList.forEach(v -> System.out.printf(" %d", v));
 
             logger.log("Завершаем программу");
         }
