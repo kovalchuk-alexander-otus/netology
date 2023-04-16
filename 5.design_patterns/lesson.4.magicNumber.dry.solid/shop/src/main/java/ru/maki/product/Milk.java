@@ -1,8 +1,8 @@
 package ru.maki.product;
 
 public class Milk extends Product {
-    protected MilkType milkType; // тип молочки
-    protected double fatPercent; // процент жирности
+    protected final MilkType milkType; // тип молочки
+    protected final double fatPercent; // процент жирности
     public enum MilkType {MILK, KEFIR, COTTAGE_CHEESE, SOUR_CREAM, BUTTER, CHEESE}
     public Milk(String name, int price, int rating, Country country, MilkType milkType, double fatPercent) {
         super("milk", name, price, rating, country);

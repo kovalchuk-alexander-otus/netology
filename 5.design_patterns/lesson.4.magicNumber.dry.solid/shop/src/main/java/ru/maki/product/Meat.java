@@ -1,8 +1,8 @@
 package ru.maki.product;
 
 public class Meat extends Product{
-    MeatType meatType; // тип мяса
-    boolean isGroundMeat; // фарш
+    final MeatType meatType; // тип мяса
+    final boolean isGroundMeat; // фарш
     public enum MeatType {PORK, BEEF, LAMB, POULTRY}
     public Meat(String name, int price, int rating, Country country, MeatType meatType, boolean isGroundMeat) {
         super("meat", name, price, rating, country);

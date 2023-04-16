@@ -1,15 +1,13 @@
 package ru.maki.product;
 
 public abstract class Product implements Comparable<Product> {
-    protected String type; // тип продукта
-    protected String name; // название продукта
-    protected int price; // стоимость продукта
-    protected int rating; // рейтинг продукта
-    protected Country country; // страна происхождения
+    protected final String type; // тип продукта
+    protected final String name; // название продукта
+    protected final int price; // стоимость продукта
+    protected final int rating; // рейтинг продукта
+    protected final Country country; // страна происхождения
 
     public enum Country {RUSSIA, CHINA, BRASILIA, INDIA, IRAN, AZERBAIJAN, BELARUS}
-
-    ;
 
     public Product(String type, String name, int price, int rating, Country country) {
         this.type = type;
@@ -54,8 +52,6 @@ public abstract class Product implements Comparable<Product> {
     public int compareTo(Product o) {
         int i = this.type.compareTo(o.type);
         return i != 0 ?
-                i : this.hashCode() == o.hashCode() ?
-                    0 : this.hashCode() > o.hashCode() ?
-                        1 : -1;
+                i : Integer.compare(this.hashCode(), o.hashCode());
     }
 }

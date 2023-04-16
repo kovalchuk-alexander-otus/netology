@@ -1,9 +1,9 @@
 package ru.maki.product;
 
 public class Bread extends Product {
-    boolean isBlack; // черный (белый)
-    boolean isRye; // ржаной (пшеничный)
-    boolean isUnleavened; // бездрожжевой (дрожжевой)
+    final boolean isBlack; // черный (белый)
+    final boolean isRye; // ржаной (пшеничный)
+    final boolean isUnleavened; // бездрожжевой (дрожжевой)
 
     public Bread(String name, int price, int rating, Country country, boolean color, boolean isRye, boolean isUnleavened) {
         super("bread", name, price, rating, country);

@@ -12,8 +12,8 @@ public class Stock {
     protected static Stock stock = null;
     protected Map<Client, List<Order>> clientHistory = new HashMap<>(); // структура для хранения информации по
     // заказам конкретного Клиента
-    protected Map<Product, Integer> products = new HashMap<>(); // каталог продукции на складе
-    protected Map<Product, Integer> reservation = new HashMap<>(); // информация о забронированном .. но не оплаченном на
+    protected final Map<Product, Integer> products = new HashMap<>(); // каталог продукции на складе
+    protected final Map<Product, Integer> reservation = new HashMap<>(); // информация о забронированном .. но не оплаченном на
     // данный момент товаре
     protected Queue<Order> paymentControl; // очередь контроля оплаты
     protected Queue<Order> assembly; // сборка
@@ -91,8 +91,7 @@ public class Stock {
                     productIntegerEntry.getValue());
         }
 
-        Map<Product, Integer> map = new TreeMap<>();
-        map.putAll(this.products);
+        Map<Product, Integer> map = new TreeMap<>(this.products);
 
         System.out.println();
         for (Map.Entry<Product, Integer> productIntegerEntry : map.entrySet()) {
