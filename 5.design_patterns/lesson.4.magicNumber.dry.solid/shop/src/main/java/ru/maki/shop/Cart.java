@@ -5,6 +5,7 @@ import ru.maki.product.Product;
 import java.util.HashMap;
 import java.util.Map;
 
+// Корзина покупателя
 public class Cart {
 
     private HashMap<Product, Integer> products; // корзина Покупателя - продукты и количество

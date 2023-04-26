@@ -1,5 +1,7 @@
 package ru.maki.product;
 
+import ru.maki.client.Country;
+
 public class Bread extends Product {
     final boolean isBlack; // черный (белый)
     final boolean isRye; // ржаной (пшеничный)
@@ -10,6 +12,24 @@ public class Bread extends Product {
         this.isBlack = color;
         this.isRye = isRye;
         this.isUnleavened = isUnleavened;
+    }
+
+    // отобразить Покупателю список уникальных параметров, которые необходимо указать для выбора Продукта
+    @Override
+    public void showUniqueProductParameter(){
+        System.out.println("Укажите название (name) хлебо-булочного изделия: ");
+    }
+
+    // проверка соответствия продукта, указанным Покупателем параметрам
+    @Override
+    public boolean checkProductParams(String[] params) {
+        if (params.length != 1) {
+            return false;
+        }
+        if (this.name.equals(params[0])) {
+            return true;
+        }
+        return false;
     }
 
     @Override

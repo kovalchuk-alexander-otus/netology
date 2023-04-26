@@ -1,13 +1,34 @@
 package ru.maki.product;
 
+import ru.maki.client.Country;
+
 public class Meat extends Product{
     final MeatType meatType; // тип мяса
     final boolean isGroundMeat; // фарш
     public enum MeatType {PORK, BEEF, LAMB, POULTRY}
+
     public Meat(String name, int price, int rating, Country country, MeatType meatType, boolean isGroundMeat) {
         super("meat", name, price, rating, country);
         this.meatType = meatType;
         this.isGroundMeat = isGroundMeat;
+    }
+
+    // отобразить Покупателю список уникальных параметров, которые необходимо указать для выбора Продукта
+    @Override
+    public void showUniqueProductParameter(){
+        System.out.println("Укажите название (name), тип (meatType) мясной продукции: ");
+    }
+
+    // проверка соответствия продукта, указанным Покупателем параметрам
+    @Override
+    public boolean checkProductParams(String[] params) {
+        if (params.length != 2) {
+            return false;
+        }
+        if (this.name.equals(params[0]) && this.meatType.toString().equals(params[1])) {
+            return true;
+        }
+        return false;
     }
 
     // халяль (исключил свинину)

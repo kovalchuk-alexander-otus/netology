@@ -1,5 +1,8 @@
 package ru.maki.product;
 
+import ru.maki.client.Country;
+
+// абстрактный класс Продукты
 public abstract class Product implements Comparable<Product> {
     protected final String type; // тип продукта
     protected final String name; // название продукта
@@ -7,14 +10,26 @@ public abstract class Product implements Comparable<Product> {
     protected final int rating; // рейтинг продукта
     protected final Country country; // страна происхождения
 
-    public enum Country {RUSSIA, CHINA, BRASILIA, INDIA, IRAN, AZERBAIJAN, BELARUS}
-
     public Product(String type, String name, int price, int rating, Country country) {
         this.type = type;
         this.name = name;
         this.price = price;
         this.rating = rating;
         this.country = country;
+    }
+
+    public String getType() {
+        return this.type;
+    }
+
+    // отобразить Покупателю список уникальных параметров, которые необходимо указать для выбора Продукта
+    public void showUniqueProductParameter(){
+        System.out.println("Укажите уникальные параметры продукта: ");;
+    }
+    
+    // проверка соответствия продукта, указанным Покупателем параметрам
+    public boolean checkProductParams(String[] params){
+        return false;
     }
 
     @Override
