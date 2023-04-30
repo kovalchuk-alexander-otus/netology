@@ -1,17 +1,19 @@
 package ru.maki;
 
+import ru.maki.client.*;
 import ru.maki.product.Bread;
 import ru.maki.product.Meat;
 import ru.maki.product.Product;
-import ru.maki.shop.Stock;
+import ru.maki.shop.*;
 
-import java.util.Arrays;
-import java.util.Scanner;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import static ru.maki.client.Country.RUSSIA;
 
 public class Main {
     final String END = "end";
+
     public static void main(String[] args) {
 
         // инициируем магазин (ну, типа откуда-то подгружаем товары)
@@ -27,29 +29,38 @@ public class Main {
                 .printGoodsInStock("Склад обновлен..");
 
 
-
         // имитируем процесс покупки - состоит из стадий:
         //   наполнение корзины,
         //   оформления заказа
 
         // ..наполнение Корзины
+        Cart cart = new Cart();
         String input;
-        try(Scanner scanner = new Scanner(System.in)){
-            while (true){
+        int count;
+        try (Scanner scanner = new Scanner(System.in)) {
+            while (true) {
                 System.out.println("Выберите \"Раздел каталога\"");
-                Stock.get().showProductsType(); // выберите Раздел каталога
+                Stock.get()
+                        .showProductsType(); // выберите Раздел каталога
                 input = scanner.nextLine();
 
-                if(Stock.get().showUniqueProductParams(input)){
+                if (Stock.get()
+                        .showUniqueProductParams(input)) {
                     System.out.println("Выберите \"Продукт\"");
-                    Stock.get().showProducts(input); // выберите Продукт
-                    String[] params = scanner.nextLine().split(" ");
+                    Stock.get()
+                            .showProducts(input); // выберите Продукт
+                    String[] params = scanner.nextLine()
+                            .split(" ");
                     System.out.println(Arrays.toString(params));
 
-                    try{
+                    try {
                         Product product = Stock.get()
                                 .getProductByParams(params);
                         System.out.println(product);
+                        System.out.println("Укажите желаемое количество: ");
+                        count = Integer.parseInt(scanner.nextLine());
+                        cart.addProduct(product, count);
+                        System.out.println(cart);
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
                     }
@@ -57,26 +68,47 @@ public class Main {
 
                 System.out.println("В случае, если вы закончили выбор Продукции - введите \"end\".");
                 input = scanner.nextLine();
-                if(input.equals("end")){
+                if (input.equals("end")) {
                     break;
                 }
             }
         }
-        // ..оформления Заказа
+
+        // ..оформление Заказа
+        cart.printProducts("В корзине: ");
 
         // трекинг Заказа и его контроль
+        OrderBuilder orderBuilder = new OrderBuilderImpl();
+
+        // ..подтверждение перечня продуктов в заказе
+        orderBuilder.setCart(cart);
+
+        // ..заведение Клиента с нуля
+        Map<ContactsType, Contact> contacts = new HashMap<>();
+        contacts.put(ContactsType.PHONE, new Phone("+7(322)323-22-44"));
+        contacts.put(ContactsType.MAIL, new Mail("mail@gmail.com"));
+
+        Client client = new Client("Alex", "Kovach", contacts,
+                new Address(RUSSIA, City.SAINT_PETERSBURG, "Nevsky avenue", 23, 35));
+        orderBuilder.setClient(client);
+
+        // ..заведение информации о доставке (доставка на дом)
+        orderBuilder.setDeliveryInfo(client.getAddress(), client.getContacts(), new GregorianCalendar(2023,
+                Calendar.JANUARY, 25));
+
+        // ..заведение информации о способе оплаты
+        orderBuilder.setPaymentInfo(PaymentMethod.CASH);
+
+        System.out.println(orderBuilder);
+
+        // ..формирование заказа
+        Order order = orderBuilder.build (DeliveryMethod.DELIVERY);
+
+        System.out.println(order);
 
         //
 
 
-        // TODO: проектирование магазина
-        //  товар (рейтинг - свойство)
-        //+      молочка (тип..молоко,кефир,творог,сыр,сметана,ряженка,масло; % жирности)
-        //+    , мясо (тип..свинина/говядина/баранина/птица, фарш..признак)
-        //+    , хлеб (белый/черный, ржаной/пшеничный, бездрожжевой/дрожжевой)
-        //-    , овощи-фрукты (сезонные, сорт)
-        //+  склад -> товар (HashMap - товар, количество)
-        //     реализовать сортировку при выводе мапы на экран
         //  клиент
         //  корзина покупателя (HashMap - товар, количество)
         //  сервис доставки - трекинг?

@@ -10,4 +10,12 @@ public class Office {
         this.name = name;
         this.address = address;
     }
+
+    @Override
+    public String toString() {
+        return "Office{" +
+                "name='" + name + '\'' +
+                ", address=" + address +
+                '}';
+    }
 }

@@ -14,4 +14,35 @@ public class Address {
         this.building = building;
         this.apartment = apartment;
     }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public int getBuilding() {
+        return building;
+    }
+
+    public int getApartment() {
+        return apartment;
+    }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "country=" + country +
+                ", city=" + city +
+                ", street='" + street + '\'' +
+                ", building=" + building +
+                ", apartment=" + apartment +
+                '}';
+    }
 }

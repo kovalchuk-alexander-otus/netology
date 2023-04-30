@@ -8,7 +8,7 @@ import java.util.Map;
 // Корзина покупателя
 public class Cart {
 
-    private HashMap<Product, Integer> products; // корзина Покупателя - продукты и количество
+    private Map<Product, Integer> products = new HashMap<>(); // корзина Покупателя - продукты и количество
 
     // добавление продукта в корзину Покупателя
     public void addProduct(Product product, int number) {
@@ -48,5 +48,12 @@ public class Cart {
         for (Map.Entry<Product, Integer> productIntegerEntry : this.products.entrySet()) {
             System.out.printf("[%3d] %s%n", productIntegerEntry.getValue(), productIntegerEntry.getKey());
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "products=" + products +
+                '}';
     }
 }

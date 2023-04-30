@@ -2,6 +2,11 @@ package ru.maki.client;
 
 public class Phone implements Contact{
     private String phone;
+
+    public Phone(String phone) {
+        this.phone = phone;
+    }
+
     @Override
     public String getInfo() {
         return this.phone;

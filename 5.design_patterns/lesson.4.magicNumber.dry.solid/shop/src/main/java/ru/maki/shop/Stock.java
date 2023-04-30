@@ -66,7 +66,7 @@ public class Stock {
     public int availableNumberOfProduct(Product product) {
         int productNumber = this.products.get(product);
         int bookingNumber = 0;
-        if (!this.reservation.isEmpty()) {
+        if (this.reservation.containsKey(product)) {
             bookingNumber = this.reservation.get(product);
         }
         return productNumber - bookingNumber;
