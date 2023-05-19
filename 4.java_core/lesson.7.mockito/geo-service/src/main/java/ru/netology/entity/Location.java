@@ -32,4 +32,13 @@ public class Location {
     public int getBuiling() {
         return builing;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        Location l = (Location) obj;
+        return ( this.city == null && l.city == null || this.city.equals(l.city) )
+            && ( this.country == null && l.country == null || this.country.equals(l.country) )
+            && ( this.street == null && l.street == null || this.street.equals(l.street) )
+            && this.builing == l.builing;
+    }
 }
