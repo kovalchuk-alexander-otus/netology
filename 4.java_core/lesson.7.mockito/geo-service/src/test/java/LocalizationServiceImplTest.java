@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LocalizationServiceImplTest {
 
-    LocalizationService localizationService = new LocalizationServiceImpl();
+    final LocalizationService localizationService = new LocalizationServiceImpl();
 
     @ParameterizedTest
     @CsvSource({

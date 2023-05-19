@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 
 public class GeoServiceImplTest {
 
-    GeoService geoService = new GeoServiceImpl();
+    final GeoService geoService = new GeoServiceImpl();
 
     @ParameterizedTest
     @MethodSource("locationByIpTestParameters")
