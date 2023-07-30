@@ -1,3 +1,5 @@
+package ru.netology.geo;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -22,7 +24,8 @@ public class GeoServiceImplTest {
     }
 
     static Stream<Object> locationByIpTestParameters() {
-        return Stream.of(Arguments.of("0.0.0.0", null)
+        return Stream.of(Arguments.of("", null)
+                , Arguments.of("0.0.0.0", null)
                 , Arguments.of("127.0.0.1", new Location(null, null, null, 0))
                 , Arguments.of("172.0.32.11", new Location("Moscow", Country.RUSSIA, "Lenina", 15))
                 , Arguments.of("96.44.183.149", new Location("New York", Country.USA, " 10th Avenue", 32))
