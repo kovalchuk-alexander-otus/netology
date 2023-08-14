@@ -30,7 +30,8 @@ public class GeoServiceImplTest {
                 , Arguments.of("172.0.32.11", new Location("Moscow", Country.RUSSIA, "Lenina", 15))
                 , Arguments.of("96.44.183.149", new Location("New York", Country.USA, " 10th Avenue", 32))
                 , Arguments.of("172. ...", new Location("Moscow", Country.RUSSIA, null, 0))
-                , Arguments.of("96. ...", new Location("New York", Country.USA, null, 0)));
+                , Arguments.of("96. ...", new Location("New York", Country.USA, null, 0))
+                , Arguments.of("99.44.183.149", null));
     }
 
 

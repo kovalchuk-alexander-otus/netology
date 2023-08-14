@@ -13,12 +13,14 @@ public class LocalizationServiceImplTest {
     final LocalizationService localizationService = new LocalizationServiceImpl();
 
     @ParameterizedTest
-    @CsvSource({
+    @CsvSource(value = {
             "RUSSIA,         Добро пожаловать",
             "GERMANY,        Welcome",
             "USA,            Welcome",
-            "BRAZIL,         Welcome"
-    })
+            "BRAZIL,         Welcome",
+            "null,           Welcome",
+            ",               Welcome"
+    }, nullValues={"null"})
     void testLocale(Country country, String locale) {
         String expectedLocale = localizationService.locale(country);
         assertEquals(locale, expectedLocale);
