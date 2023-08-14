@@ -31,7 +31,7 @@ public class MessageSenderImplTest {
                 .thenReturn(message);
 
         MessageSenderImpl messageSender = new MessageSenderImpl(geoService, localizationService);
-        Map<String, String> headers = new HashMap<String, String>();
+        Map<String, String> headers = new HashMap<>();
         headers.put(MessageSenderImpl.IP_ADDRESS_HEADER, ip);
         String expectedMessage = messageSender.send(headers);
 

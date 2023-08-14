@@ -25,12 +25,10 @@ public class MessageSenderImpl implements MessageSender {
         if (ipAddress != null && !ipAddress.isEmpty()) {
             Location location = geoService.byIp(ipAddress);
             locale = localizationService.locale(location.getCountry());
-            System.out.printf("Отправлено сообщение: %s", locale);
-            return locale;
         } else {
             locale = localizationService.locale(Country.USA);
-            System.out.printf("Отправлено сообщение: %s", locale);
-            return locale;
         }
+        System.out.printf("Отправлено сообщение: %s", locale);
+        return locale;
     }
 }
