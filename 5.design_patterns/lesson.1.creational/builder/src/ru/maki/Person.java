@@ -43,10 +43,9 @@ public class Person {
 
     /**
      * метод увеличивает возраст на год (если возраст изначально был известен)
-     *
      */
     public void happyBirthday() {
-        if(this.age != PersonBuilder.NOT_AGE){
+        if (this.age != PersonBuilder.NOT_AGE) {
             this.age++;
             System.out.printf("Позвольте вас чествовать с очередным кольцом времени на вашем срезе.. %d%n", this.age);
         }
@@ -67,7 +66,7 @@ public class Person {
      * @return
      */
     public boolean hasAddress() {
-        return this.city!=null && !this.city.isEmpty();
+        return this.city != null && !this.city.isEmpty();
     }
 
     /**
@@ -75,7 +74,7 @@ public class Person {
      *
      * @return
      */
-    public PersonBuilder newChildBuilder(){
+    public PersonBuilder newChildBuilder() {
         System.out.println("Поздравляем с прибавлением в семействе..");
         return new PersonBuilder().setSurname(this.surname).setAddress(this.city).setAge(0);
     }
