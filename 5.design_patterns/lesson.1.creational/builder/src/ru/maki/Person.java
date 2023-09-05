@@ -54,7 +54,7 @@ public class Person {
     /**
      * метод возвращает признак - известен ли возраст человека
      *
-     * @return
+     * @return boolean
      */
     public boolean hasAge() {
         return this.age >= 0;
@@ -63,7 +63,7 @@ public class Person {
     /**
      * метод возвращает признак - известен ли адрес (город проживания) человека
      *
-     * @return
+     * @return boolean
      */
     public boolean hasAddress() {
         return this.city != null && !this.city.isEmpty();
@@ -72,7 +72,7 @@ public class Person {
     /**
      * метод создания дитяти
      *
-     * @return
+     * @return PersonBuilder
      */
     public PersonBuilder newChildBuilder() {
         System.out.println("Поздравляем с прибавлением в семействе..");

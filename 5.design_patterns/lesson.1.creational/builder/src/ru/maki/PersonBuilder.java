@@ -1,7 +1,5 @@
 package ru.maki;
 
-import java.lang.invoke.StringConcatException;
-
 public class PersonBuilder {
     private String name;
     private String surname;
