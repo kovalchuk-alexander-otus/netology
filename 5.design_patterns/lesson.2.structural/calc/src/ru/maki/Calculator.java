@@ -5,8 +5,8 @@ public class Calculator {
         return new Formula();
     }
 
-    public static enum Operation {
-        SUM, SUB, MULT, DIV, POW;
+    public enum Operation {
+        SUM, SUB, MULT, DIV, POW
     }
 
     public static class Formula {
