@@ -1,16 +1,23 @@
 package ru.maki.shop;
 
-public class Product {
-    ProductType productType;
-    String name;
-    int price;
-    int rate;
+import lombok.Getter;
+import lombok.Setter;
 
-    public Product(ProductType productType, String name, int price, int rate) {
+@Getter
+@Setter
+public class Product {
+    private ProductType productType;
+    private String name;
+    private int price;
+    private int rate;
+    private int inStock;
+
+    public Product(ProductType productType, String name, int price, int rate, int inStock) {
         this.productType = productType;
         this.name = name;
         this.price = price;
         this.rate = rate;
+        this.inStock = inStock;
     }
 
     @Override
@@ -20,6 +27,7 @@ public class Product {
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 ", rate=" + rate +
+                ", inStock=" + inStock +
                 '}';
     }
 }

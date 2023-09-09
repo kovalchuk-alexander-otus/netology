@@ -1,0 +1,44 @@
+[
+  {
+    "productType": "PRODUCTS",
+    "name": "Кефир",
+    "price": 100,
+    "rate": 0,
+    "inStock": 700
+  },
+  {
+    "productType": "PRODUCTS",
+    "name": "Молоко",
+    "price": 86,
+    "rate": 0,
+    "inStock": 500
+  },
+  {
+    "productType": "PRODUCTS",
+    "name": "Зерновик",
+    "price": 70,
+    "rate": 0,
+    "inStock": 230
+  },
+  {
+    "productType": "TECHNOLOGY",
+    "name": "Музыкальный центр",
+    "price": 13500,
+    "rate": 0,
+    "inStock": 200
+  },
+  {
+    "productType": "TECHNOLOGY",
+    "name": "Телевизор",
+    "price": 23500,
+    "rate": 0,
+    "inStock": 300
+  },
+  {
+    "productType": "TECHNOLOGY",
+    "name": "Телефон",
+    "price": 34000,
+    "rate": 0,
+    "inStock": 500
+  }
+]

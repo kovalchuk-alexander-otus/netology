@@ -6,12 +6,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
+ * TODO(complete) : DRY
  * как один из вариантов DRY :
  *   чтобы не писать везде стандартную конструкцию по выводу логирования в терминал - реализуем один раз метод log
  */
 public class Logger {
     private static Logger instance;
-    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(Env.FORMAT_DATE_WITH_TIME);
 
     private Logger() {
 
@@ -23,6 +23,6 @@ public class Logger {
     }
 
     public void log(String message) {
-        System.out.printf("[%s] : %s%n", LocalDateTime.now().format(dateTimeFormatter), message);
+        System.out.printf("[%s] : %s%n", LocalDateTime.now().format(Env.dateTimeFormatter), message);
     }
 }

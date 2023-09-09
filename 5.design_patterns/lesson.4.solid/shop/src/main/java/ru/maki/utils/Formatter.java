@@ -15,13 +15,14 @@ import java.util.List;
 public class Formatter<K> {
 
     protected Class<K> typeClass;
+    protected Logger logger = Logger.getInstance();
 
     public Formatter(Class<K> typeClass) {
         this.typeClass = typeClass;
     }
 
     /**
-     * формирование строки в формате JSON из списка объектов Employee
+     * формирование строки в формате JSON из списка объектов <K>
      * @param list
      * @return
      */
@@ -34,7 +35,7 @@ public class Formatter<K> {
     }
 
     /**
-     * генерация списка объектов Employee из ранее прочитанного JSON
+     * генерация списка объектов <K> из ранее прочитанного JSON
      */
     public List<K> jsonToList(String json) {
         GsonBuilder builder = new GsonBuilder();
@@ -43,13 +44,15 @@ public class Formatter<K> {
         try {
             JSONParser parser = new JSONParser();
             JSONArray jsonArray = (JSONArray) parser.parse(json);
-            System.out.println(typeClass.getName());
+            logger.log("объекты класса [" + typeClass.getName() + "]..");
             for (Object jsonObject : jsonArray) {
                 list.add(gson.fromJson(String.valueOf(jsonObject), typeClass));
             }
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
+        logger.log(list.toString());
+
         return list;
     }
 }

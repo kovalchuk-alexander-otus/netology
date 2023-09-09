@@ -1,10 +1,12 @@
 package ru.maki.shop;
 
-public interface ProductsLoader {
+import java.util.List;
+
+public interface ProductsLoader <K> {
     /**
      * загрузка продуктов из source (file/db/...)
      */
-    void load();
+    List<K> load();
 
     /**
      * пополнение товаров на складе - подгрузка из source (file/db/...)
@@ -14,5 +16,5 @@ public interface ProductsLoader {
     /**
      * обновление данных в source (актуализация информации по итогам продаж)
      */
-    void refresh();
+    void unload();
 }
