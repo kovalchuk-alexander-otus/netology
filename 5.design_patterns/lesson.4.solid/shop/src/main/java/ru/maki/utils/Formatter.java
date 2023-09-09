@@ -6,7 +6,6 @@ import com.google.gson.reflect.TypeToken;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import ru.maki.shop.Product;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -14,8 +13,8 @@ import java.util.List;
 
 public class Formatter<K> {
 
-    protected Class<K> typeClass;
-    protected Logger logger = Logger.getInstance();
+    protected final Class<K> typeClass;
+    protected final Logger logger = Logger.getInstance();
 
     public Formatter(Class<K> typeClass) {
         this.typeClass = typeClass;

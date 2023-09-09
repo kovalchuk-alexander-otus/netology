@@ -29,9 +29,10 @@ import java.util.List;
 // Товар
 // Заказ
 //
-public class Shop implements ProductsLoader, Schowcase, Purchase {
-    Logger logger = Logger.getInstance();
+public class Shop implements ProductsLoader<Product>, Schowcase, Purchase {
+    final Logger logger = Logger.getInstance();
     @Getter
+    final
     List<Product> productList;
     private static Shop instance;
 
@@ -52,10 +53,9 @@ public class Shop implements ProductsLoader, Schowcase, Purchase {
         data = SimpleFile.read(Env.SOURCE, Env.CHARSET_UTF8);
 
         // варим список объектов
-        Formatter formatter = new Formatter<>(Product.class);
-        List<Product> products = formatter.jsonToList(data);
+        Formatter<Product> formatter = new Formatter<>(Product.class);
 
-        return products;
+        return formatter.jsonToList(data);
     }
 
     /**
@@ -70,7 +70,7 @@ public class Shop implements ProductsLoader, Schowcase, Purchase {
         data = SimpleFile.read(this.getDeliverySourceName(), Env.CHARSET_UTF8);
 
         // варим список объектов
-        Formatter formatter = new Formatter<>(Product.class);
+        Formatter<Product> formatter = new Formatter<>(Product.class);
         List<Product> productsDelivery = formatter.jsonToList(data);
 
         for (Product productDelivery : productsDelivery) {
@@ -109,7 +109,7 @@ public class Shop implements ProductsLoader, Schowcase, Purchase {
      */
     @Override
     public void unload() {
-        Formatter<Product> formatter = new Formatter(Product.class);
+        Formatter<Product> formatter = new Formatter<>(Product.class);
         SimpleFile.write(formatter.listToJson(productList), Env.SOURCE, Env.CHARSET_UTF8);
     }
 

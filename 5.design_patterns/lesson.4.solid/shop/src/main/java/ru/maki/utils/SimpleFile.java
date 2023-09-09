@@ -12,7 +12,7 @@ import java.io.IOException;
  *
  */
 public class SimpleFile {
-    private static Logger logger = Logger.getInstance();
+    private static final Logger logger = Logger.getInstance();
 
     /**
      * чтение из файла

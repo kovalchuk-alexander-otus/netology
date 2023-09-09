@@ -14,6 +14,7 @@ public class OrderImpl implements Order {
 
     @AllArgsConstructor
     @ToString
+    static
     class DeliveryInfo {
         String city;
         String street;
@@ -23,6 +24,7 @@ public class OrderImpl implements Order {
 
     @AllArgsConstructor
     @ToString
+    static
     class PayInfo {
         String card;
         int pin;
@@ -30,6 +32,7 @@ public class OrderImpl implements Order {
 
     @AllArgsConstructor
     @ToString
+    static
     class RateInfo {
         int rate;
         String review;
