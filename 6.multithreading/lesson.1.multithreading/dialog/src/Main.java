@@ -5,7 +5,7 @@ import java.util.stream.IntStream;
 public class Main {
     private static void dialog(int thread) {
         while (true) {
-            System.out.printf("Я поток %s. Всем привет!", thread);
+            System.out.printf("Я поток %s. Всем привет! [%s]%n ", thread, Thread.currentThread().getName());
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
