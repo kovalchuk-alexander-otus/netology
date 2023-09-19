@@ -24,6 +24,8 @@ public class Main {
                     System.out.printf("%s завершен\n", Thread.currentThread().getName());
                     return -200;
                 }
+            } else {
+                System.out.println("tut");
             }
         }
 
@@ -40,18 +42,29 @@ public class Main {
         // готовим коллекцию тасок
         List<Callable<Integer>> tasks = IntStream.range(1, POOL_COUNT).
                 mapToObj((v) -> {
-                    Callable<Integer> dialogCall = () -> dialog(v, 10); // random.nextInt(10)
+                    Callable<Integer> dialogCall = new Callable<Integer>() {
+                        @Override
+                        public Integer call() throws Exception {
+                            dialog(v, 10);
+                            return random.nextInt();
+                        }
+                    };
+                    // () -> {dialog(v, 10); return 10;}; // random.nextInt(10)
                     // FutureTask<Integer> futureTask = new FutureTask<>(dialogCall);
                     return dialogCall;
                 }).collect(Collectors.toList());
 
         // отправляем задачи на выполнение в пул потоков
-        pool.invokeAll(tasks);
+        pool.invokeAny(tasks);
 
-        // дабы проверить, проходит ли прога дальше - добавил это
-        System.out.println("any");
+        // ..поглядим, какие из потоков активные
+        System.out.println(pool);
+        Thread.sleep(5000);
+        System.out.println(pool);
+        pool.shutdownNow();
+        System.out.println(pool);
+        Thread.sleep(5000);
+        System.out.println(pool);
 
-        // ввиду того, что даже после завершения всех процессов прога не останавливается - добавил строчку ниже
-        //pool.shutdown();
     }
 }
