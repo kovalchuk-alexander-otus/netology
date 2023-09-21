@@ -67,4 +67,11 @@ public class PhoneBook {
         List<String> contacts = this.phoneBook.get(phone);
         return contacts == null ? null : String.join(", ", contacts);
     }
+
+    /**
+     * Номер телефона по имени
+     */
+    public String findByName(String name){
+        return null;
+    }
 }

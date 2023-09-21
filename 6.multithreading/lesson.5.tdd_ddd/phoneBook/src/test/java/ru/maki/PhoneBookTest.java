@@ -135,4 +135,19 @@ public class PhoneBookTest {
         String actual = phoneBook.findByNumber("23553");
         assertEquals(String.format("Вместо искомого контакта [%s] найден [%s].", expected, actual), expected, actual);
     }
+
+    /**
+     * Простой тест
+     * поиск по Телефонной книге номера телефона по имени
+     */
+    @Test
+    public void testFindByName(){
+        PhoneBook phoneBook = new PhoneBook();
+        String expected = "12312";
+        phoneBook.add("Alex", "23553");
+        phoneBook.add("Felix", "12312");
+        phoneBook.add("Junior", "34244");
+        String actual = phoneBook.findByName("Felix");
+        assertEquals(String.format("Вместо искомого номера телефона [%s] найден [%s].", expected, actual), expected, actual);
+    }
 }
