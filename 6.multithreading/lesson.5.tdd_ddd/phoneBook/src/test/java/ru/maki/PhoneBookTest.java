@@ -75,10 +75,21 @@ public class PhoneBookTest {
     @Test
     public void testFindByNumberDouble() {
         PhoneBook phoneBook = new PhoneBook();
-        String expected = "Junior";
+        String expected = "Alex";
         phoneBook.add("Alex", "23553");
         phoneBook.add("Felix", "23423");
-        phoneBook.add("Junior", "23553");
+        phoneBook.add("Alex", "23442");
+        String actual = phoneBook.findByNumber("23442");
+        assertEquals(String.format("Вместо искомого контакта [%s] найден [%s].", expected, actual), expected, actual);
+    }
+
+    @Test
+    public void testFindByNumberDoubleNull() {
+        PhoneBook phoneBook = new PhoneBook();
+        String expected = null;
+        phoneBook.add("Alex", "23553");
+        phoneBook.add("Felix", "23423");
+        phoneBook.add("Alex", "23442");
         String actual = phoneBook.findByNumber("23553");
         assertEquals(String.format("Вместо искомого контакта [%s] найден [%s].", expected, actual), expected, actual);
     }
@@ -107,6 +118,21 @@ public class PhoneBookTest {
         PhoneBook phoneBook = new PhoneBook();
         String expected = null;
         String actual = phoneBook.findByNumber("14312");
+        assertEquals(String.format("Вместо искомого контакта [%s] найден [%s].", expected, actual), expected, actual);
+    }
+
+    /**
+     * Сложный тест
+     * поиск по Телефонной книге, содержащей одинаковые номера у нескольких контактов
+     */
+    @Test
+    public void testFindByNumberMany() {
+        PhoneBook phoneBook = new PhoneBook();
+        String expected = "Alex, Felix, Junior";
+        phoneBook.add("Alex", "23553");
+        phoneBook.add("Felix", "23553");
+        phoneBook.add("Junior", "23553");
+        String actual = phoneBook.findByNumber("23553");
         assertEquals(String.format("Вместо искомого контакта [%s] найден [%s].", expected, actual), expected, actual);
     }
 }

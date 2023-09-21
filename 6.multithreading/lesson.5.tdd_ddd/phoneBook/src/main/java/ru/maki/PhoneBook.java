@@ -64,6 +64,7 @@ public class PhoneBook {
      * Имя по номеру телефона
      */
     public String findByNumber(String phone) {
-        return null;
+        List<String> contacts = this.phoneBook.get(phone);
+        return contacts == null ? null : String.join(", ", contacts);
     }
 }
