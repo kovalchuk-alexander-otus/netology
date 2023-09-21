@@ -32,8 +32,8 @@ public class PhoneBookTest {
         int actual;
         phoneBook.add("Alex", "23553");
         phoneBook.add("Felix", "13442");
-        actual = phoneBook.add("Junior", "13423");
-        phoneBook.add("Alex", "23235");
+        phoneBook.add("Junior", "13423");
+        actual = phoneBook.add("Alex", "23235");
         assertEquals(String.format("Число контактов [%s] не соответствует заведенному [%s]", expected, actual), expected, actual);
     }
 
@@ -150,4 +150,48 @@ public class PhoneBookTest {
         String actual = phoneBook.findByName("Felix");
         assertEquals(String.format("Вместо искомого номера телефона [%s] найден [%s].", expected, actual), expected, actual);
     }
+    /**
+     * Простой тест
+     * поиск по Телефонной книге номера телефона по отсутствующему там имени
+     */
+    @Test
+    public void testFindByNameNull(){
+        PhoneBook phoneBook = new PhoneBook();
+        String expected = null;
+        phoneBook.add("Alex", "23553");
+        phoneBook.add("Felix", "12312");
+        phoneBook.add("Junior", "34244");
+        String actual = phoneBook.findByName("Edvard");
+        assertEquals(String.format("Вместо искомого номера телефона [%s] найден [%s].", expected, actual), expected, actual);
+    }
+    /**
+     * Простой тест
+     * поиск по пустой Телефонной книге
+     */
+    @Test
+    public void testFindByNameEmpty(){
+        PhoneBook phoneBook = new PhoneBook();
+        String expected = null;
+        String actual = phoneBook.findByName("Edvard");
+        assertEquals(String.format("Вместо искомого номера телефона [%s] найден [%s].", expected, actual), expected, actual);
+    }
+    /**
+     * Сложный тест
+     * поиск по Телефонной книге контакта добавленного два раза
+     */
+    @Test
+    public void testFindByNameDouble() {
+        PhoneBook phoneBook = new PhoneBook();
+        String expected = "23235";
+        phoneBook.add("Alex", "23553");
+        phoneBook.add("Felix", "13442");
+        phoneBook.add("Junior", "13423");
+        phoneBook.add("Alex", "23235");
+        String actual = phoneBook.findByName("Alex");
+        assertEquals(String.format("Вместо искомого номера телефона [%s] найден [%s].", expected, actual), expected, actual);
+    }
+
+
 }
+
+

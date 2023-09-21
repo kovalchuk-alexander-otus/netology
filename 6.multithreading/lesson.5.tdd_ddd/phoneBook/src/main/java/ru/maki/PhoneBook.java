@@ -72,6 +72,6 @@ public class PhoneBook {
      * Номер телефона по имени
      */
     public String findByName(String name){
-        return null;
+        return this.nameBook.get(name);
     }
 }
