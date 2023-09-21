@@ -59,4 +59,11 @@ public class PhoneBook {
 
         return this.nameBook.size();
     }
+
+    /**
+     * Имя по номеру телефона
+     */
+    public String findByNumber(String phone) {
+        return null;
+    }
 }
