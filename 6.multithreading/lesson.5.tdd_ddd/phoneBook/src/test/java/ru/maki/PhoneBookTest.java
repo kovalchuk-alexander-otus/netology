@@ -17,4 +17,16 @@ public class PhoneBookTest {
         assertEquals(String.format("Число контактов [%s] не соответствует заведенному [%s]", expected, actual), expected, actual);
         // assertTrue(String.format("Число контактов [%s] не соответствует заведенному [%s]", expected, actual), actual == expected);
     }
+    @Test
+    public void testAddWhitRepeatName() {
+        PhoneBook phoneBook = new PhoneBook();
+        int expected = 3;
+        int actual;
+        phoneBook.add("Alex", "23553");
+        phoneBook.add("Felix", "13442");
+        actual = phoneBook.add("Junior", "13423");
+        phoneBook.add("Alex", "23235");
+        assertEquals(String.format("Число контактов [%s] не соответствует заведенному [%s]", expected, actual), expected, actual);
+        // assertTrue(String.format("Число контактов [%s] не соответствует заведенному [%s]", expected, actual), actual == expected);
+    }
 }
