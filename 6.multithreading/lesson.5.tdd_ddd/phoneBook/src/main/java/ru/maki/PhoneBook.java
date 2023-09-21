@@ -2,10 +2,8 @@ package ru.maki;
 
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Телефонная книга
@@ -16,6 +14,7 @@ public class PhoneBook {
 
     private Map<String, String> nameBook = new HashMap<>();
     private Map<String, List<String>> phoneBook = new HashMap<>();
+    private Map<String, String> names = new TreeMap<>();
 
     /**
      * Добавление в Телефонную книгу имени с номером
@@ -27,6 +26,7 @@ public class PhoneBook {
 
         // добавление в список имен
         this.nameBook.put(name, phone);
+        this.names.put(name, phone);
 
         // добавление в список номеров
         String link = null;
@@ -71,14 +71,14 @@ public class PhoneBook {
     /**
      * Номер телефона по имени
      */
-    public String findByName(String name){
+    public String findByName(String name) {
         return this.nameBook.get(name);
     }
 
     /**
      * Вывести все имена в алфавитном порядке
      */
-    public String printAllNames(){
-        return null;
+    public String printAllNames() {
+        return this.names == null ? "" : String.join(", ", this.names.keySet().stream().collect(Collectors.toList()));
     }
 }

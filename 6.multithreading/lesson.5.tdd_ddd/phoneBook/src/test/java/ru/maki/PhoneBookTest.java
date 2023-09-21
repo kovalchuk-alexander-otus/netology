@@ -141,7 +141,7 @@ public class PhoneBookTest {
      * поиск по Телефонной книге номера телефона по имени
      */
     @Test
-    public void testFindByName(){
+    public void testFindByName() {
         PhoneBook phoneBook = new PhoneBook();
         String expected = "12312";
         phoneBook.add("Alex", "23553");
@@ -150,12 +150,13 @@ public class PhoneBookTest {
         String actual = phoneBook.findByName("Felix");
         assertEquals(String.format("Вместо искомого номера телефона [%s] найден [%s].", expected, actual), expected, actual);
     }
+
     /**
      * Простой тест
      * поиск по Телефонной книге номера телефона по отсутствующему там имени
      */
     @Test
-    public void testFindByNameNull(){
+    public void testFindByNameNull() {
         PhoneBook phoneBook = new PhoneBook();
         String expected = null;
         phoneBook.add("Alex", "23553");
@@ -164,17 +165,19 @@ public class PhoneBookTest {
         String actual = phoneBook.findByName("Edvard");
         assertEquals(String.format("Вместо искомого номера телефона [%s] найден [%s].", expected, actual), expected, actual);
     }
+
     /**
      * Простой тест
      * поиск по пустой Телефонной книге
      */
     @Test
-    public void testFindByNameEmpty(){
+    public void testFindByNameEmpty() {
         PhoneBook phoneBook = new PhoneBook();
         String expected = null;
         String actual = phoneBook.findByName("Edvard");
         assertEquals(String.format("Вместо искомого номера телефона [%s] найден [%s].", expected, actual), expected, actual);
     }
+
     /**
      * Сложный тест
      * поиск по Телефонной книге контакта добавленного два раза
@@ -196,10 +199,11 @@ public class PhoneBookTest {
      * вывод из Телефонной книги списка контактов в алфавитном порядке
      */
     @Test
-    public void testPrintAllNames(){
+    public void testPrintAllNames() {
         PhoneBook phoneBook = new PhoneBook();
-        String expected = "Alex, Felix, Junior";
+        String expected = "Alex, Felix, Junior, Wachtang";
         phoneBook.add("Alex", "23553");
+        phoneBook.add("Wachtang", "34144");
         phoneBook.add("Junior", "13423");
         phoneBook.add("Felix", "13442");
         String actual = phoneBook.printAllNames();
@@ -211,7 +215,7 @@ public class PhoneBookTest {
      * вывод из пустой Телефонной книги списка контактов в алфавитном порядке
      */
     @Test
-    public void testPrintAllNamesEmpty(){
+    public void testPrintAllNamesEmpty() {
         PhoneBook phoneBook = new PhoneBook();
         String expected = "";
         String actual = phoneBook.printAllNames();
