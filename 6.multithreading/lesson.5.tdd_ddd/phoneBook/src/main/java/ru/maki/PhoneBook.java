@@ -74,4 +74,11 @@ public class PhoneBook {
     public String findByName(String name){
         return this.nameBook.get(name);
     }
+
+    /**
+     * Вывести все имена в алфавитном порядке
+     */
+    public String printAllNames(){
+        return null;
+    }
 }

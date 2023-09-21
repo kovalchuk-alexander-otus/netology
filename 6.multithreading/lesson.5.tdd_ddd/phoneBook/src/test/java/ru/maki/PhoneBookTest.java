@@ -191,7 +191,32 @@ public class PhoneBookTest {
         assertEquals(String.format("Вместо искомого номера телефона [%s] найден [%s].", expected, actual), expected, actual);
     }
 
+    /**
+     * Простой тест
+     * вывод из Телефонной книги списка контактов в алфавитном порядке
+     */
+    @Test
+    public void testPrintAllNames(){
+        PhoneBook phoneBook = new PhoneBook();
+        String expected = "Alex, Felix, Junior";
+        phoneBook.add("Alex", "23553");
+        phoneBook.add("Junior", "13423");
+        phoneBook.add("Felix", "13442");
+        String actual = phoneBook.printAllNames();
+        assertEquals(String.format("Вместо ожидаемого списка контактов [%s] получен [%s].", expected, actual), expected, actual);
+    }
 
+    /**
+     * Простой тест
+     * вывод из пустой Телефонной книги списка контактов в алфавитном порядке
+     */
+    @Test
+    public void testPrintAllNamesEmpty(){
+        PhoneBook phoneBook = new PhoneBook();
+        String expected = "";
+        String actual = phoneBook.printAllNames();
+        assertEquals(String.format("Вместо ожидаемого списка контактов [%s] получен [%s].", expected, actual), expected, actual);
+    }
 }
 
 
