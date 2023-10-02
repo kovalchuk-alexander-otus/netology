@@ -50,8 +50,24 @@ public class Main {
             // заполняем Map полученным числом инструкций SEARCHED_SYMBOL в маршруте
             synchronized (sizeToFreq) {
                 sizeToFreq.put(count, sizeToFreq.getOrDefault(count, 0) + 1);
+                sizeToFreq.notify();
             }
         };
+
+        Thread lider = new Thread(() -> {
+            while(!Thread.interrupted()) {
+                try {
+                    synchronized (sizeToFreq) {
+                        sizeToFreq.wait();
+                        int max = sizeToFreq.keySet().stream().mapToInt(v -> v).max().getAsInt();
+                        System.out.printf("\n                    %d", max);
+                    }
+                } catch (InterruptedException e) {
+                    return;
+                }
+            }
+        });
+        lider.start();
 
         // запускаем в цикле все потоки
         int i = THREADS;
@@ -64,6 +80,7 @@ public class Main {
         LOGGER.info("before: " + threadPool.getActiveCount());
         while (threadPool.getActiveCount() > 0) { // для формирования отчета, ждем, чтобы все запущенные потоки отработали
         }
+        lider.interrupt();
         threadPool.shutdown(); // помечаем, что потоки следует гасить после завершения работы ..иначе программа не остановится
         LOGGER.info("all must completed: " + threadPool.getActiveCount());
 
