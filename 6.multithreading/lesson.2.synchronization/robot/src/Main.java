@@ -82,9 +82,12 @@ public class Main {
         System.out.println("Другие размеры:");
 
         for (Map.Entry<Integer, Integer> integerIntegerEntry : sizeToFreq.entrySet()) {
-            System.out.printf(" -%d (%d раз)\n", integerIntegerEntry.getKey(), integerIntegerEntry.getValue());
             sum += integerIntegerEntry.getKey() * integerIntegerEntry.getValue();
             count += integerIntegerEntry.getValue();
+            if (integerIntegerEntry.getKey() == max) {
+                continue;
+            }
+            System.out.printf(" -%d (%d раз)\n", integerIntegerEntry.getKey(), integerIntegerEntry.getValue());
         }
         LOGGER.info(String.format("\ncheck [%d]\n", sum));
         LOGGER.info(String.format("check count [%d]\n\n", count));
