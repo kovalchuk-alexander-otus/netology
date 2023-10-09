@@ -7,7 +7,7 @@ public class Main {
     private static final int QUE_LENGTH = 100;
     private static final int WORD_LENGTH = 100_000;
     private static final String WORD_TEMPLATE = "abc";
-    private static final int REPS = 1000;
+    private static final int REPS = 10_000;
     private static BlockingQueue<String> queForA = new ArrayBlockingQueue<>(QUE_LENGTH);
     private static BlockingQueue<String> queForB = new ArrayBlockingQueue<>(QUE_LENGTH);
     private static BlockingQueue<String> queForC = new ArrayBlockingQueue<>(QUE_LENGTH);
@@ -50,6 +50,13 @@ public class Main {
         }).start();
     }
 
+    /**
+     * Тексто-генератор
+     *
+     * @param letters - перечень символов, доступных при генерации строки
+     * @param length - длинна строки
+     * @return
+     */
     public static String generateText(String letters, int length) {
         Random random = new Random();
         StringBuilder text = new StringBuilder();
@@ -62,6 +69,9 @@ public class Main {
 
 }
 
+/**
+ * Оболочка, для использования функционального интерфейса Consumer (требующего на вход один аргумент)
+ */
 class Pack {
     private BlockingQueue<String> que;
     private char symbol;
