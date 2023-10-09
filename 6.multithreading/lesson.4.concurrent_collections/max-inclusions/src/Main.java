@@ -1,3 +1,6 @@
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 import java.util.Random;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
@@ -54,7 +57,7 @@ public class Main {
      * Тексто-генератор
      *
      * @param letters - перечень символов, доступных при генерации строки
-     * @param length - длинна строки
+     * @param length  - длинна строки
      * @return
      */
     public static String generateText(String letters, int length) {
@@ -72,20 +75,10 @@ public class Main {
 /**
  * Оболочка, для использования функционального интерфейса Consumer (требующего на вход один аргумент)
  */
+@AllArgsConstructor
 class Pack {
+    @Getter
     private BlockingQueue<String> que;
+    @Getter
     private char symbol;
-
-    public Pack(BlockingQueue<String> que, char symbol) {
-        this.que = que;
-        this.symbol = symbol;
-    }
-
-    public BlockingQueue<String> getQue() {
-        return que;
-    }
-
-    public char getSymbol() {
-        return symbol;
-    }
 }
